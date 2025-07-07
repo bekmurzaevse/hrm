@@ -31,7 +31,7 @@ services:
     container_name: project_postgres
     restart: always
     environment:
-      POSTGRES_DB: library_db
+      POSTGRES_DB: hrm_db
       POSTGRES_USER: user
       POSTGRES_PASSWORD: 123
     volumes:
