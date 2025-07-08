@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Vacancy extends Model
@@ -30,5 +31,23 @@ class Vacancy extends Model
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ];
+    }
+
+    /**
+     * Summary of recruiter
+     * @return BelongsTo<User, Vacancy>
+     */
+    public function recruiter(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Summary of project
+     * @return BelongsTo<User, Vacancy>
+     */
+    public function project(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }
