@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -50,4 +51,59 @@ class User extends Authenticatable
             'updated_at' => 'datetime',
         ];
     }
+
+    /**
+     * Summary of clients
+     * @return HasMany<Client, User>
+     */
+    public function clients(): HasMany
+    {
+        return $this->hasMany(Client::class);
+    }
+
+    /**
+     * Summary of interactions
+     * @return HasMany<Interaction, User>
+     */
+    public function interactions(): HasMany
+    {
+        return $this->hasMany(Interaction::class);
+    }
+
+    /**
+     * Summary of vacancies
+     * @return HasMany<Vacancy, User>
+     */
+    public function vacancies(): HasMany
+    {
+        return $this->hasMany(Vacancy::class);
+    }
+
+    /**
+     * Summary of projects
+     * @return HasMany<Project, User>
+     */
+    public function projects(): HasMany
+    {
+        return $this->hasMany(Project::class);
+    }
+
+    /**
+     * Summary of hrDocuments
+     * @return HasMany<HrDocument, User>
+     */
+    public function hrDocuments(): HasMany
+    {
+        return $this->hasMany(HrDocument::class);
+    }
+
+    /**
+     * Summary of hrOrders
+     * @return HasMany<HrOrder, User>
+     */
+    public function hrOrders(): HasMany
+    {
+        return $this->hasMany(HrOrder::class);
+    }
+
 }

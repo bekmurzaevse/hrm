@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Project extends Model
@@ -27,5 +29,23 @@ class Project extends Model
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ];
+    }
+
+    /**
+     * Summary of createdBy
+     * @return BelongsTo<User, Project>
+     */
+    public function createdBy(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Summary of vacancies
+     * @return HasMany<Vacancy, Project>
+     */
+    public function vacancies(): HasMany
+    {
+        return $this->hasMany(Vacancy::class);
     }
 }

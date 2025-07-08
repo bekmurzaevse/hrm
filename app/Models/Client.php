@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Client extends Model
@@ -26,6 +28,33 @@ class Client extends Model
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ];
+    }
+
+    /**
+     * Summary of interactions
+     * @return HasMany<Interaction, Client>
+     */
+    public function interactions(): HasMany
+    {
+        return $this->hasMany(Interaction::class);
+    }
+
+    /**
+     * Summary of deals
+     * @return HasMany<Deals, Client>
+     */
+    public function deals(): HasMany
+    {
+        return $this->hasMany(Deals::class);
+    }
+
+    /**
+     * Summary of createdBy
+     * @return BelongsTo<User, Client>
+     */
+    public function createdBy(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 
 }
