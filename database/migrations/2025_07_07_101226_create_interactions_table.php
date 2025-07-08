@@ -14,10 +14,8 @@ return new class extends Migration
         Schema::create('interactions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('client_id')->constrained()->restrictOnDelete()->cascadeOnUpdate();
-            $table->string('type');
-            // $table->enum('type', ['phone', 'telegram', 'instagram', 'email']);
+            $table->enum('type', ['phone', 'telegram', 'instagram', 'email']);
             $table->text('notes');
-            $table->date('date');
             $table->foreignId('user_id')->constrained()->restrictOnDelete()->cascadeOnUpdate();
             $table->text('description')->nullable();
             $table->timestamps();
