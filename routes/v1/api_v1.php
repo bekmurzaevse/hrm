@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\v1\ClientController;
 use Illuminate\Support\Facades\Route;
 
 Route::pattern('id', '\d+');
@@ -15,6 +16,10 @@ Route::get('/', function () {
     return "API v1";
 });
 
-Route::get('/test', function () {
-    return "TEST";
+Route::prefix('clients')->group(function () {
+    Route::get('/', [ClientController::class, 'index']);
+    Route::get('/{id}', [ClientController::class, 'show']);
+    Route::post('/create', [ClientController::class, 'create']);
+    Route::put('/update/{id}', [ClientController::class, 'update']);
+    Route::delete('/delete/{id}', [ClientController::class, 'delete']);
 });

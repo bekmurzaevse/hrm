@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('contact_info');
-            $table->string('status');
+            $table->enum('status', ['active', 'de_active'])->default('active');
             $table->foreignId('created_by')->constrained('users')->restrictOnDelete()->cascadeOnUpdate();
             $table->timestamps();
             $table->softDeletes();
