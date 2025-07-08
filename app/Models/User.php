@@ -52,6 +52,17 @@ class User extends Authenticatable
         ];
     }
 
+
+    public function courses()
+    {
+        return $this->hasMany(Course::class, 'created_by');
+    }
+
+    public function courseAssignments()
+    {
+        return $this->hasMany(CourseAssignment::class);
+    }
+
     /**
      * Summary of clients
      * @return HasMany<Client, User>
