@@ -5,7 +5,7 @@ namespace App\Http\Resources\v1\Deals;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class ClientCollection extends ResourceCollection
+class DealsCollection extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.

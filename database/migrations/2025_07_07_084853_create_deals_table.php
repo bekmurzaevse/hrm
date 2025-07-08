@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('client_id')->constrained()->restrictOnDelete()->cascadeOnUpdate();
             $table->enum('stage', ['lead', 'negotiation', 'contract', 'completed'])->default('lead');
-            $table->decimal('value');
+            $table->integer('value');
             $table->string('description')->nullable();
             $table->timestamps();
             $table->softDeletes();

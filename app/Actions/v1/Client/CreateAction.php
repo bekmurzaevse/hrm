@@ -25,7 +25,7 @@ class CreateAction
             'created_by' => $dto->createdBy,
         ];
 
-        $client = Client::create($data);
+        Client::create($data);
 
         return static::toResponse(
             message: 'Client created'
