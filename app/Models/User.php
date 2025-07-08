@@ -4,13 +4,15 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -18,8 +20,10 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
+        'phone',
         'password',
     ];
 
@@ -43,8 +47,11 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'created_at' => 'datetime',
+            'updated_at' => 'datetime',
         ];
     }
+
 
     public function courses()
     {
@@ -55,4 +62,59 @@ class User extends Authenticatable
     {
         return $this->hasMany(CourseAssignment::class);
     }
+
+    /**
+     * Summary of clients
+     * @return HasMany<Client, User>
+     */
+    public function clients(): HasMany
+    {
+        return $this->hasMany(Client::class);
+    }
+
+    /**
+     * Summary of interactions
+     * @return HasMany<Interaction, User>
+     */
+    public function interactions(): HasMany
+    {
+        return $this->hasMany(Interaction::class);
+    }
+
+    /**
+     * Summary of vacancies
+     * @return HasMany<Vacancy, User>
+     */
+    public function vacancies(): HasMany
+    {
+        return $this->hasMany(Vacancy::class);
+    }
+
+    /**
+     * Summary of projects
+     * @return HasMany<Project, User>
+     */
+    public function projects(): HasMany
+    {
+        return $this->hasMany(Project::class);
+    }
+
+    /**
+     * Summary of hrDocuments
+     * @return HasMany<HrDocument, User>
+     */
+    public function hrDocuments(): HasMany
+    {
+        return $this->hasMany(HrDocument::class);
+    }
+
+    /**
+     * Summary of hrOrders
+     * @return HasMany<HrOrder, User>
+     */
+    public function hrOrders(): HasMany
+    {
+        return $this->hasMany(HrOrder::class);
+    }
+
 }
