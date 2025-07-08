@@ -14,11 +14,10 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('course_id')->constrained('courses')->restrictOnDelete()->cascadeOnUpdate();
             $table->foreignId('user_id')->constrained('users')->restrictOnDelete()->cascadeOnUpdate();
-
             $table->dateTime('assigned_at')->nullable();
             $table->dateTime('completed_at')->nullable();
-
             $table->string('certificate_url')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
