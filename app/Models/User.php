@@ -117,4 +117,14 @@ class User extends Authenticatable
         return $this->hasMany(HrOrder::class);
     }
 
+    public function testResults(): HasMany
+    {
+        return $this->hasMany(TestResult::class);
+    }
+
+    public function candidateNotes(): HasMany
+    {
+        return $this->hasMany(CandidateNote::class);
+    }
+
 }

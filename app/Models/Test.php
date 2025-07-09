@@ -6,14 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Course extends Model
+class Test extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'title',
-        'description',
-        'created_by',
+        'course_id',
     ];
 
     protected function casts(): array
@@ -24,24 +23,13 @@ class Course extends Model
         ];
     }
 
-    public function creator()
+    public function course()
     {
-        return $this->belongsTo(User::class, 'created_by');
+        return $this->belongsTo(Course::class);
     }
 
-    public function courseAssignments()
+    public function testResults()
     {
-        return $this->hasMany(CourseAssignment::class);
+        return $this->hasMany(TestResult::class);
     }
-
-    public function materials()
-    {
-        return $this->hasMany(CourseMaterial::class);
-    }
-
-    public function tests()
-    {
-        return $this->hasMany(Test::class);
-    }
-
 }
