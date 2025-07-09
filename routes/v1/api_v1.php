@@ -3,7 +3,9 @@
 use App\Http\Controllers\v1\ClientController;
 use App\Http\Controllers\v1\DealsController;
 use App\Http\Controllers\v1\InterActionController;
+use App\Http\Controllers\v1\ProjectController;
 use App\Http\Controllers\v1\UserController;
+use App\Http\Controllers\v1\VacancyController;
 use Illuminate\Support\Facades\Route;
 
 Route::pattern('id', '\d+');
@@ -49,4 +51,20 @@ Route::prefix('interactions')->group(function () {
     Route::post('/create', [InterActionController::class, 'create']);
     Route::put('/update/{id}', [InterActionController::class, 'update']);
     Route::delete('/delete/{id}', [InterActionController::class, 'delete']);
+});
+
+Route::prefix('projects')->group(function () {
+    Route::get('/', [ProjectController::class, 'index']);
+    Route::get('/{id}', [ProjectController::class, 'show']);
+    Route::post('/create', [ProjectController::class, 'create']);
+    Route::put('/update/{id}', [ProjectController::class, 'update']);
+    Route::delete('/delete/{id}', [ProjectController::class, 'delete']);
+});
+
+Route::prefix('vacancies')->group(function () {
+    Route::get('/', [VacancyController::class, 'index']);
+    Route::get('/{id}', [VacancyController::class, 'show']);
+    Route::post('/create', [VacancyController::class, 'create']);
+    Route::put('/update/{id}', [VacancyController::class, 'update']);
+    Route::delete('/delete/{id}', [VacancyController::class, 'delete']);
 });
