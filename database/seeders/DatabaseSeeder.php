@@ -23,6 +23,14 @@ class DatabaseSeeder extends Seeder
             VacancySeeder::class,
             HrDocumentSeeder::class,
             HrOrderSeeder::class,
+            CourseSeeder::class,
+            CourseMaterialSeeder::class,
+            CourseAssignmentSeeder::class,
+            TestSeeder::class,
+            TestResultSeeder::class,
+            CandidateSeeder::class,
+            CandidateNoteSeeder::class,
+            CandidateDocumentSeeder::class,
         ]);
     }
 }
