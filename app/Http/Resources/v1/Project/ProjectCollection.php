@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\v1\Client;
+namespace App\Http\Resources\v1\Project;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class ClientCollection extends ResourceCollection
+class ProjectCollection extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.

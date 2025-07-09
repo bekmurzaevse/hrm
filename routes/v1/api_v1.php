@@ -3,6 +3,7 @@
 use App\Http\Controllers\v1\ClientController;
 use App\Http\Controllers\v1\DealsController;
 use App\Http\Controllers\v1\InterActionController;
+use App\Http\Controllers\v1\ProjectController;
 use App\Http\Controllers\v1\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -49,4 +50,12 @@ Route::prefix('interactions')->group(function () {
     Route::post('/create', [InterActionController::class, 'create']);
     Route::put('/update/{id}', [InterActionController::class, 'update']);
     Route::delete('/delete/{id}', [InterActionController::class, 'delete']);
+});
+
+Route::prefix('projects')->group(function () {
+    Route::get('/', [ProjectController::class, 'index']);
+    Route::get('/{id}', [ProjectController::class, 'show']);
+    Route::post('/create', [ProjectController::class, 'create']);
+    Route::put('/update/{id}', [ProjectController::class, 'update']);
+    Route::delete('/delete/{id}', [ProjectController::class, 'delete']);
 });
