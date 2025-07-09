@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->enum('status', ['active', 'completed', 'paused'])->default('active');
-            $table->decimal('budget', 12, 2)->nullable();
+            $table->double('budget')->nullable();
             $table->date('deadline')->nullable();
             $table->foreignId('created_by')->constrained('users')->restrictOnDelete()->cascadeOnUpdate();
             $table->timestamps();
