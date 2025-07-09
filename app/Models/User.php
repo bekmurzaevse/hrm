@@ -55,7 +55,7 @@ class User extends Authenticatable
 
     public function courses()
     {
-        return $this->hasMany(Course::class, 'created_by');
+        return $this->hasMany(Course::class);
     }
 
     public function courseAssignments()

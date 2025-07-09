@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\v1\ClientController;
+use App\Http\Controllers\v1\CourseController;
 use App\Http\Controllers\v1\DealsController;
 use App\Http\Controllers\v1\InterActionController;
 use App\Http\Controllers\v1\ProjectController;
@@ -67,4 +68,12 @@ Route::prefix('vacancies')->group(function () {
     Route::post('/create', [VacancyController::class, 'create']);
     Route::put('/update/{id}', [VacancyController::class, 'update']);
     Route::delete('/delete/{id}', [VacancyController::class, 'delete']);
+});
+
+Route::prefix('courses')->group(function () {
+    Route::get('/', [CourseController::class, 'index']);
+    Route::get('/{id}', [CourseController::class, 'show']);
+    Route::post('/create', [CourseController::class, 'create']);
+    Route::put('/update/{id}', [CourseController::class, 'update']);
+    Route::delete('/delete/{id}', [CourseController::class, 'delete']);
 });
