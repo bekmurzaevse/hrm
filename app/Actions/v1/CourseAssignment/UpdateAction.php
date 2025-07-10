@@ -20,8 +20,8 @@ class UpdateAction
             $assignment = CourseAssignment::with(['course', 'user'])->findOrFail($id);
 
             $assignment->update([
-                'course_id'       => $dto->course_id ?? $assignment->course_id,
-                'user_id'         => $dto->user_id ?? $assignment->user_id,
+                'course_id'       => $dto->course_id,
+                'user_id'         => $dto->user_id,
                 'assigned_at'     => $dto->assigned_at ?? $assignment->assigned_at,
                 'completed_at'    => $dto->completed_at ?? $assignment->completed_at,
                 'certificate_url' => $dto->certificate_url ?? $assignment->certificate_url,
