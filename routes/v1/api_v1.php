@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\v1\ClientController;
+use App\Http\Controllers\v1\CourseAssignmentController;
 use App\Http\Controllers\v1\CourseController;
 use App\Http\Controllers\v1\DealsController;
 use App\Http\Controllers\v1\InterActionController;
@@ -76,4 +77,12 @@ Route::prefix('courses')->group(function () {
     Route::post('/create', [CourseController::class, 'create']);
     Route::put('/update/{id}', [CourseController::class, 'update']);
     Route::delete('/delete/{id}', [CourseController::class, 'delete']);
+});
+
+Route::prefix('course-assignments')->group(function () {
+    Route::get('/', [CourseAssignmentController::class, 'index']);
+    Route::get('/{id}', [CourseAssignmentController::class, 'show']);
+    Route::post('/create', [CourseAssignmentController::class, 'create']);
+    Route::put('/update/{id}', [CourseAssignmentController::class, 'update']);
+    Route::delete('/delete/{id}', [CourseAssignmentController::class, 'delete']);
 });
