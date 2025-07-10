@@ -11,20 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('recruitment_funnel_stages', function (Blueprint $table) {
+        Schema::create('kpi_records', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnUpdate()->restrictOnDelete();
             $table->foreignId('vacancy_id')->constrained('vacancies')->cascadeOnUpdate()->restrictOnDelete();
-            $table->enum('stage_name', [
-                'Application Received',
-                'Screening',
-                'Interview Scheduled',
-                'Interview Completed',
-                'Offer Extended',
-                'Offer Accepted',
-                'Hired',
-                'Rejected'
-            ]);
-            $table->integer('order');
+            $table->decimal('kpi_score', 5, 2);
+            $table->dateTime('calculated_at');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -35,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('recruitment_funnel_stages');
+        Schema::dropIfExists('kpi_records');
     }
 };

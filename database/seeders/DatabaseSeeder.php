@@ -23,6 +23,14 @@ class DatabaseSeeder extends Seeder
             VacancySeeder::class,
             HrDocumentSeeder::class,
             HrOrderSeeder::class,
+            RecruitmentFunnelStageSeeder::class,
+            ApplicationSeeder::class,
+            FunnelLogSeeder::class,
+            ReportSeeder::class,
+            TaskSeeder::class,
+            TelegramLogSeeder::class,
+            KpiRecordSeeder::class,
+            FinanceSeeder::class,
         ]);
     }
 }
