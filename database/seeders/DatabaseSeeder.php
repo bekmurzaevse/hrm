@@ -31,6 +31,14 @@ class DatabaseSeeder extends Seeder
             CandidateSeeder::class,
             CandidateNoteSeeder::class,
             CandidateDocumentSeeder::class,
+            RecruitmentFunnelStageSeeder::class,
+            ApplicationSeeder::class,
+            FunnelLogSeeder::class,
+            ReportSeeder::class,
+            TaskSeeder::class,
+            TelegramLogSeeder::class,
+            KpiRecordSeeder::class,
+            FinanceSeeder::class,
         ]);
     }
 }

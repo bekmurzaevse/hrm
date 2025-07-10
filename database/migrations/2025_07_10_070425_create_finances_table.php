@@ -11,20 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('recruitment_funnel_stages', function (Blueprint $table) {
+        Schema::create('finances', function (Blueprint $table) {
             $table->id();
+            $table->string('type');
+            $table->foreignId('client_id')->constrained('clients')->cascadeOnUpdate()->restrictOnDelete();
             $table->foreignId('vacancy_id')->constrained('vacancies')->cascadeOnUpdate()->restrictOnDelete();
-            $table->enum('stage_name', [
-                'Application Received',
-                'Screening',
-                'Interview Scheduled',
-                'Interview Completed',
-                'Offer Extended',
-                'Offer Accepted',
-                'Hired',
-                'Rejected'
-            ]);
-            $table->integer('order');
+            $table->decimal('amount', 12, 2);
+            $table->string('category');
+            $table->text('note');
+            $table->date('date');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -35,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('recruitment_funnel_stages');
+        Schema::dropIfExists('finances');
     }
 };
