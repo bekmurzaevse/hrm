@@ -6,6 +6,7 @@ use App\Http\Controllers\v1\CourseController;
 use App\Http\Controllers\v1\DealsController;
 use App\Http\Controllers\v1\InterActionController;
 use App\Http\Controllers\v1\ProjectController;
+use App\Http\Controllers\v1\RecruitmentFunnelStageController;
 use App\Http\Controllers\v1\UserController;
 use App\Http\Controllers\v1\VacancyController;
 use Illuminate\Support\Facades\Route;
@@ -85,4 +86,12 @@ Route::prefix('course-assignments')->group(function () {
     Route::post('/create', [CourseAssignmentController::class, 'create']);
     Route::put('/update/{id}', [CourseAssignmentController::class, 'update']);
     Route::delete('/delete/{id}', [CourseAssignmentController::class, 'delete']);
+});
+
+Route::prefix('recruitment-funnel-stages')->group(function () {
+    Route::get('/', [RecruitmentFunnelStageController::class, 'index']);
+    Route::get('/{id}', [RecruitmentFunnelStageController::class, 'show']);
+    Route::post('/create', [RecruitmentFunnelStageController::class, 'create']);
+    Route::put('/update/{id}', [RecruitmentFunnelStageController::class, 'update']);
+    Route::delete('/delete/{id}', [RecruitmentFunnelStageController::class, 'delete']);
 });
