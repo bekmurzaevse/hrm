@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\v1\ApplicationController;
 use App\Http\Controllers\v1\ClientController;
 use App\Http\Controllers\v1\CourseAssignmentController;
 use App\Http\Controllers\v1\CourseController;
@@ -103,4 +104,12 @@ Route::prefix('funnel-logs')->group(function () {
     Route::post('/create', [FunnelLogController::class, 'create']);
     Route::put('/update/{id}', [FunnelLogController::class, 'update']);
     Route::delete('/delete/{id}', [FunnelLogController::class, 'delete']);
+});
+
+Route::prefix('applications')->group(function () {
+    Route::get('/', [ApplicationController::class, 'index']);
+    Route::get('/{id}', [ApplicationController::class, 'show']);
+    Route::post('/create', [ApplicationController::class, 'create']);
+    Route::put('/update/{id}', [ApplicationController::class, 'update']);
+    Route::delete('/delete/{id}', [ApplicationController::class, 'delete']);
 });
