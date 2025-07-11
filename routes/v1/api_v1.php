@@ -4,6 +4,7 @@ use App\Http\Controllers\v1\ClientController;
 use App\Http\Controllers\v1\CourseAssignmentController;
 use App\Http\Controllers\v1\CourseController;
 use App\Http\Controllers\v1\DealsController;
+use App\Http\Controllers\v1\FunnelLogController;
 use App\Http\Controllers\v1\InterActionController;
 use App\Http\Controllers\v1\ProjectController;
 use App\Http\Controllers\v1\RecruitmentFunnelStageController;
@@ -94,4 +95,12 @@ Route::prefix('recruitment-funnel-stages')->group(function () {
     Route::post('/create', [RecruitmentFunnelStageController::class, 'create']);
     Route::put('/update/{id}', [RecruitmentFunnelStageController::class, 'update']);
     Route::delete('/delete/{id}', [RecruitmentFunnelStageController::class, 'delete']);
+});
+
+Route::prefix('funnel-logs')->group(function () {
+    Route::get('/', [FunnelLogController::class, 'index']);
+    Route::get('/{id}', [FunnelLogController::class, 'show']);
+    Route::post('/create', [FunnelLogController::class, 'create']);
+    Route::put('/update/{id}', [FunnelLogController::class, 'update']);
+    Route::delete('/delete/{id}', [FunnelLogController::class, 'delete']);
 });
