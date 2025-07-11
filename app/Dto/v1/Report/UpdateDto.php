@@ -8,10 +8,10 @@ use Illuminate\Http\UploadedFile;
 readonly class UpdateDto
 {
     public function __construct(
-        public ?string $title,
-        public ?string $type,
-        public ?int $generatedBy,
-        public ?UploadedFile $file,
+        public string $title,
+        public string $type,
+        public int $generatedBy,
+        public UploadedFile $file,
     ) {
     }
 

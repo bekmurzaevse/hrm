@@ -28,25 +28,22 @@ class UpdateAction
         try {
             $data = Report::findOrFail($id);
 
-            $file = $dto->file;
-            if ($file) {
-                if (Storage::disk('public')->exists($data->file_path)) {
-                    Storage::disk('public')->delete($data->file_path);
-                }
-
-                $originalFilename = $file->getClientOriginalName();
-                $fileName = pathinfo($originalFilename, PATHINFO_FILENAME);
-                $fileName = $fileName . '_' . Str::random(10) . '_' . now()->format('Y-m-d-H:i:s') . '.' . $file->extension();
-
-                $savedPath = Storage::disk('public')->putFileAs('reports', $file, $fileName);
-            } else {
-                $savedPath = $data->file_path;
+            if (Storage::disk('public')->exists($data->file_path)) {
+                Storage::disk('public')->delete($data->file_path);
             }
 
+            $file = $dto->file;
+
+            $originalFilename = $file->getClientOriginalName();
+            $fileName = pathinfo($originalFilename, PATHINFO_FILENAME);
+            $fileName = $fileName . '_' . Str::random(10) . '_' . now()->format('Y-m-d-H:i:s') . '.' . $file->extension();
+
+            $savedPath = Storage::disk('public')->putFileAs('reports', $file, $fileName);
+
             $data->update([
-                'title' => $dto->title ?? $data->title,
-                'type' => $dto->type ?? $data->type,
-                'generated_by' => $dto->generatedBy ?? $data->generated_by,
+                'title' => $dto->title,
+                'type' => $dto->type,
+                'generated_by' => $dto->generatedBy,
                 'file_path' => $savedPath
             ]);
 
