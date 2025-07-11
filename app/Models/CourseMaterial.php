@@ -12,15 +12,15 @@ class CourseMaterial extends Model
 
     protected $fillable = [
         'course_id',
-        'title',
-        'description',
-        'file_path',
-        'created_by',
+        'file_url',
+        'type',
+        'uploaded_at',
     ];
 
     protected function casts(): array
     {
         return [
+            'uploaded_at' => 'datetime',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ];
