@@ -10,6 +10,7 @@ use App\Http\Controllers\v1\InterActionController;
 use App\Http\Controllers\v1\ProjectController;
 use App\Http\Controllers\v1\RecruitmentFunnelStageController;
 use App\Http\Controllers\v1\ReportController;
+use App\Http\Controllers\v1\TaskController;
 use App\Http\Controllers\v1\UserController;
 use App\Http\Controllers\v1\VacancyController;
 use Illuminate\Support\Facades\Route;
@@ -122,4 +123,12 @@ Route::prefix('reports')->group(function () {
     Route::put('/update/{id}', [ReportController::class, 'update']);
     Route::delete('/delete/{id}', [ReportController::class, 'delete']);
     Route::get('download/{id}', [ReportController::class, 'download']);
+});
+
+Route::prefix('tasks')->group(function () {
+    Route::get('/', [TaskController::class, 'index']);
+    Route::get('/{id}', [TaskController::class, 'show']);
+    Route::post('/create', [TaskController::class, 'create']);
+    Route::put('/update/{id}', [TaskController::class, 'update']);
+    Route::delete('/delete/{id}', [TaskController::class, 'delete']);
 });
