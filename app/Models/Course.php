@@ -44,4 +44,9 @@ class Course extends Model
         return $this->hasMany(Test::class);
     }
 
+    public function testResults()
+    {
+        return $this->hasManyThrough(TestResult::class, Test::class);
+    }
+
 }
