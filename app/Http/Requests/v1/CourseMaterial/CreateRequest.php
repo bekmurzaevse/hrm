@@ -17,7 +17,7 @@ class CreateRequest extends FormRequest
             'course_id' => 'required|exists:courses,id',
             'file_url' => 'required|url|max:255',
             'type' => 'required|string|in:pdf,video,image,document',
-            'uploaded_at' => 'nullable|date',
+            'uploaded_at' => 'required|date',
         ];
     }
 
@@ -32,6 +32,7 @@ class CreateRequest extends FormRequest
             'type.required' => "Fayl tu'ri ma'jbu'riy!",
             'type.string' => "Fayl tu'ri tekst boliw kerek!",
             'type.in' => "Fayl tu'ri tek pdf, video, image, document boliwi mu'mkin.",
+            'uploaded_at.required' => "Ju'klengen waqti ma'jbu'riy!",
             'uploaded_at.date' => "Ju'klengen waqti duris sa'ne formatta boliw kerek!",
         ];
     }

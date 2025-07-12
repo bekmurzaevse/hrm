@@ -7,20 +7,20 @@ use App\Http\Requests\v1\CourseMaterial\UpdateRequest;
 readonly class UpdateDto
 {
     public function __construct(
-        public int $course_id,
-        public ?string $file_url = null,
+        public int $courseId,
+        public ?string $fileUrl = null,
         public ?string $type = null,
-        public ?string $uploaded_at = null,
+        public ?string $uploadedAt = null,
     ) {
     }
 
     public static function from(UpdateRequest $request): self
     {
         return new self(
-            course_id: $request->course_id,
-            file_url: $request->file_url,
+            courseId: $request->course_id,
+            fileUrl: $request->file_url,
             type: $request->type,
-            uploaded_at: $request->uploaded_at,
+            uploadedAt: $request->uploaded_at,
         );
     }
 }

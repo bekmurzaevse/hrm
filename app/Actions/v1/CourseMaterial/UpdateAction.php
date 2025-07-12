@@ -27,10 +27,10 @@ class UpdateAction
             $material = CourseMaterial::with('course')->findOrFail($id);
 
             $material->update([
-                'course_id' => $dto->course_id,
-                'file_url' => $dto->file_url ?? $material->file_url,
+                'course_id' => $dto->courseId,
+                'file_url' => $dto->fileUrl ?? $material->fileUrl,
                 'type' => $dto->type ?? $material->type,
-                'uploaded_at' => $dto->uploaded_at ?? $material->uploaded_at,
+                'uploaded_at' => now(),
             ]);
 
             return static::toResponse(

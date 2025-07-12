@@ -17,10 +17,12 @@ class CreateAction
      */
     public function __invoke(CreateDto $dto): JsonResponse
     {
-        $test = Test::create([
+        $data = [
             'title' => $dto->title,
             'course_id' => $dto->courseId,
-        ]);
+        ];
+
+        Test::create($data);
 
         return static::toResponse(
             message: 'Test jaratildi.',

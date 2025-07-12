@@ -6,6 +6,7 @@ use App\Dto\v1\TestResult\CreateDto;
 use App\Models\TestResult;
 use App\Traits\ResponseTrait;
 use Illuminate\Http\JsonResponse;
+use function Symfony\Component\Clock\now;
 
 class CreateAction
 {
@@ -19,10 +20,10 @@ class CreateAction
     public function __invoke(CreateDto $dto): JsonResponse
     {
         $data = [
-            'test_id' => $dto->test_id,
-            'user_id' => $dto->user_id,
+            'test_id' => $dto->testId,
+            'user_id' => $dto->userId,
             'score' => $dto->score,
-            'taken_at' => $dto->taken_at,
+            'taken_at' => now(),
         ];
 
         TestResult::create($data);

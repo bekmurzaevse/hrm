@@ -9,6 +9,7 @@ use App\Http\Resources\v1\CourseAssignment\CourseAssignmentResource;
 use App\Traits\ResponseTrait;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Exceptions\ApiResponseException;
+use function Symfony\Component\Clock\now;
 
 class UpdateAction
 {
@@ -20,11 +21,11 @@ class UpdateAction
             $assignment = CourseAssignment::with(['course', 'user'])->findOrFail($id);
 
             $assignment->update([
-                'course_id'       => $dto->course_id,
-                'user_id'         => $dto->user_id,
-                'assigned_at'     => $dto->assigned_at ?? $assignment->assigned_at,
-                'completed_at'    => $dto->completed_at ?? $assignment->completed_at,
-                'certificate_url' => $dto->certificate_url ?? $assignment->certificate_url,
+                'course_id'       => $dto->courseId,
+                'user_id'         => $dto->userId,
+                'assigned_at'     => now(),
+                'completed_at'    => now(),
+                'certificate_url' => $dto->certificateUrl ?? $assignment->certificateUrl,
             ]);
 
             return static::toResponse(

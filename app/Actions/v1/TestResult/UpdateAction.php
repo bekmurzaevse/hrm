@@ -9,6 +9,7 @@ use App\Models\TestResult;
 use App\Traits\ResponseTrait;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
+use function Symfony\Component\Clock\now;
 
 class UpdateAction
 {
@@ -27,10 +28,10 @@ class UpdateAction
             $result = TestResult::with('test', 'course')->findOrFail($id);
 
             $result->update([
-                'test_id' => $dto->test_id ?? $result->test_id,
-                'user_id' => $dto->user_id ?? $result->user_id,
+                'test_id' => $dto->testId ?? $result->testId,
+                'user_id' => $dto->userId ?? $result->userId,
                 'score' => $dto->score,
-                'taken_at' => $dto->taken_at ?? $result->taken_at,
+                'taken_at' => now(),
             ]);
 
             return static::toResponse(

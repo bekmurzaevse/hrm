@@ -7,10 +7,10 @@ use App\Http\Requests\v1\TestResult\UpdateRequest;
 readonly class UpdateDto
 {
     public function __construct(
-        public ?int $test_id,
-        public ?int $user_id,
+        public ?int $testId,
+        public ?int $userId,
         public float $score,
-        public ?string $taken_at
+        public ?string $takenAt
     ) {}
 
     /**
@@ -19,10 +19,10 @@ readonly class UpdateDto
     public static function from(UpdateRequest $request): self
     {
         return new self(
-            test_id: $request->test_id,
-            user_id: $request->user_id,
+            testId: $request->test_id,
+            userId: $request->user_id,
             score: $request->score,
-            taken_at: $request->taken_at
+            takenAt: $request->taken_at
         );
     }
 }    

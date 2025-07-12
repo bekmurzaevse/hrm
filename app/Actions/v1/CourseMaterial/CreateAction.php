@@ -6,6 +6,7 @@ use App\Dto\v1\CourseMaterial\CreateDto;
 use App\Models\CourseMaterial;
 use App\Traits\ResponseTrait;
 use Illuminate\Http\JsonResponse;
+use function Symfony\Component\Clock\now;
 
 class CreateAction
 {
@@ -18,12 +19,14 @@ class CreateAction
      */
     public function __invoke(CreateDto $dto): JsonResponse
     {
-        $material = CourseMaterial::create([
-            'course_id' => $dto->course_id,
-            'file_url' => $dto->file_url,
+        $data = [
+            'course_id' => $dto->courseId,
+            'file_url' => $dto->fileUrl,
             'type' => $dto->type,
-            'uploaded_at' => $dto->uploaded_at,
-        ]);
+            'uploaded_at' => now(),
+        ];
+
+        CourseMaterial::create($data);
 
         return static::toResponse(
             message: 'Kurs materiali jaratildi.',
