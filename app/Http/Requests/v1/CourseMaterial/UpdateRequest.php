@@ -17,7 +17,6 @@ class UpdateRequest extends FormRequest
             'course_id' => 'required|exists:courses,id',
             'file_url' => 'nullable|url|max:255',
             'type' => 'nullable|string|in:pdf,video,image,document',
-            'uploaded_at' => 'nullable|date',
         ];
     }
 
@@ -27,7 +26,6 @@ class UpdateRequest extends FormRequest
             'course_id.required' => "Kurs ID ma'jbu'riy!",
             'course_id.exists' => "Bunday kurs ID bazada tabilmadi!",
             'type.in' => "Fayl tu'ri tek pdf, video, image, document boliwi mu'mkin.",
-            'uploaded_at.date' => "Ju'klengen waqti duris formatta boliw kerek!",
         ];
     }
 }

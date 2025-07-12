@@ -5,6 +5,7 @@ use App\Dto\v1\CourseAssignment\CreateDto;
 use App\Models\CourseAssignment;
 use App\Traits\ResponseTrait;
 use Illuminate\Http\JsonResponse;
+use function Symfony\Component\Clock\now;
 
 class CreateAction
 {
@@ -20,9 +21,7 @@ class CreateAction
         $data = [
             'course_id' => $dto->courseId,
             'user_id' => $dto->userId,
-            'assigned_at' => $dto->assignedAt,
-            'completed_at' => $dto->completedAt,
-            'certificate_url' => $dto->certificateUrl,
+            'assigned_at' => now(),
         ];
 
         CourseAssignment::create($data);

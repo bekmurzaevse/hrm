@@ -90,6 +90,7 @@ Route::prefix('course-assignments')->group(function () {
     Route::get('/{id}', [CourseAssignmentController::class, 'show']);
     Route::post('/create', [CourseAssignmentController::class, 'create']);
     Route::put('/update/{id}', [CourseAssignmentController::class, 'update']);
+    Route::put('/complete/{id}', [CourseAssignmentController::class, 'complete']);
     Route::delete('/delete/{id}', [CourseAssignmentController::class, 'delete']);
 });
 

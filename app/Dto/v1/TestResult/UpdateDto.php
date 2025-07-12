@@ -10,7 +10,6 @@ readonly class UpdateDto
         public ?int $testId,
         public ?int $userId,
         public float $score,
-        public ?string $takenAt
     ) {}
 
     /**
@@ -22,7 +21,6 @@ readonly class UpdateDto
             testId: $request->test_id,
             userId: $request->user_id,
             score: $request->score,
-            takenAt: $request->taken_at
         );
     }
 }    

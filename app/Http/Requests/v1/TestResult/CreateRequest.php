@@ -27,7 +27,6 @@ class CreateRequest extends FormRequest
             'test_id' => 'required|integer|exists:tests,id',
             'user_id' => 'required|integer|exists:users,id',
             'score' => 'required|numeric|min:0|max:100',
-            'taken_at' => 'required|date',
         ];
     }
 
@@ -37,7 +36,6 @@ class CreateRequest extends FormRequest
             'test_id.required' => "Test ID ma'jbu'riy.",
             'user_id.required' => "User ID m'ajbu'riy.",
             'score.required' => "Score ma'jbu'riy.",
-            'taken_at.required' => "Test tapsirilg'an waqit ma'jbu'riy.",
             'test_id.exists' => "Bul test ID sistemada joq.",
             'user_id.exists' => "Bul user ID sistemada joq.",
             'score.numeric' => "Score san boluwi kerek.",

@@ -24,9 +24,6 @@ class CreateRequest extends FormRequest
         return [
             'course_id' => 'required|exists:courses,id',
             'user_id' => 'required|exists:users,id',
-            'assigned_at' => 'required|date',
-            'completed_at' => 'required|date|after_or_equal:assigned_at',
-            'certificate_url' => 'nullable|string|max:255',
         ];
     }
 
@@ -41,13 +38,6 @@ class CreateRequest extends FormRequest
             'course_id.exists' => "Bunday kurs ID bazada tabilmadi!",
             'user_id.required' => "User ID ma'jbu'riy!",
             'user_id.exists' => "Bunday user ID bazada tabilmadi!",
-            'assigned_at.required' => "Assigned_at ma'jbu'riy!",
-            'assigned_at.date' => "Assigned_at sa'ne boliw kerek!",
-            'completed_at.required' => "Completed_at ma'jbu'riy!",
-            'completed_at.date' => "Completed_at sa'ne boliw kerek!",
-            'completed_at.after_or_equal' => "Completed_at assigned_at'tan keyin boliw kerek!",
-            'certificate_url.string' => "Certificate URL tekst boliw kerek!",
-            'certificate_url.max' => "Certificate URL 255 belgiden ko'p bolmawi kerek!",
         ];
     }
 }

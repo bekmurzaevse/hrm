@@ -9,9 +9,6 @@ readonly class CreateDto
     public function __construct(
         public int $courseId,
         public int $userId,
-        public string $assignedAt,
-        public string $completedAt,
-        public ?string $certificateUrl = null,
     ) {
     }
 
@@ -25,9 +22,6 @@ readonly class CreateDto
         return new self(
             courseId: $request->course_id,
             userId: $request->user_id,
-            assignedAt: $request->assigned_at,
-            completedAt: $request->completed_at,
-            certificateUrl: $request->certificate_url
         );
     }
 }

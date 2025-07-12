@@ -15,6 +15,13 @@ class UpdateAction
 {
     use ResponseTrait;
 
+    /**
+     * Summary of __invoke
+     * @param int $id
+     * @param \App\Dto\v1\CourseAssignment\UpdateDto $dto
+     * @throws \App\Exceptions\ApiResponseException
+     * @return JsonResponse
+     */
     public function __invoke(int $id, UpdateDto $dto): JsonResponse
     {
         try {
@@ -23,9 +30,6 @@ class UpdateAction
             $assignment->update([
                 'course_id'       => $dto->courseId,
                 'user_id'         => $dto->userId,
-                'assigned_at'     => now(),
-                'completed_at'    => now(),
-                'certificate_url' => $dto->certificateUrl ?? $assignment->certificateUrl,
             ]);
 
             return static::toResponse(

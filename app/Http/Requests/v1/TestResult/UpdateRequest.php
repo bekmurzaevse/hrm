@@ -27,7 +27,6 @@ class UpdateRequest extends FormRequest
             'test_id' => 'nullable|integer|exists:tests,id',
             'user_id' => 'nullable|integer|exists:users,id',
             'score' => 'required|numeric|min:0|max:100',
-            'taken_at' => 'nullable|date',
         ];
     }
 
@@ -42,7 +41,6 @@ class UpdateRequest extends FormRequest
             'score.numeric' => "Score san boliwi kerek.",
             'score.min' => "Score 0 den kishi bolmawi kerek.",
             'score.max' => "Score 100 den u'lken bolmawi kerek.",
-            'taken_at.date' => "Test tapsirilg'an waqit duris formatda boliwi kerek.",
         ];
     }
 }

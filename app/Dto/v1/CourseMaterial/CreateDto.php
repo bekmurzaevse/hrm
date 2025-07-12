@@ -11,7 +11,6 @@ readonly class CreateDto
         public int $courseId,
         public string $fileUrl,
         public string $type,
-        public string $uploadedAt = 'now(3)',
     ) {
     }
 
@@ -21,7 +20,6 @@ readonly class CreateDto
             courseId: $request->course_id,
             fileUrl: $request->file_url,
             type: $request->type,
-            uploadedAt: $request->uploaded_at,
         );
     }
 }

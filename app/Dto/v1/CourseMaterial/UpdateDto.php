@@ -10,7 +10,6 @@ readonly class UpdateDto
         public int $courseId,
         public ?string $fileUrl = null,
         public ?string $type = null,
-        public ?string $uploadedAt = null,
     ) {
     }
 
@@ -20,7 +19,6 @@ readonly class UpdateDto
             courseId: $request->course_id,
             fileUrl: $request->file_url,
             type: $request->type,
-            uploadedAt: $request->uploaded_at,
         );
     }
 }
