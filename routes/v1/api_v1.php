@@ -3,6 +3,7 @@
 use App\Http\Controllers\v1\ClientController;
 use App\Http\Controllers\v1\CourseController;
 use App\Http\Controllers\v1\DealsController;
+use App\Http\Controllers\v1\HrDocumentController;
 use App\Http\Controllers\v1\InterActionController;
 use App\Http\Controllers\v1\ProjectController;
 use App\Http\Controllers\v1\UserController;
@@ -76,4 +77,13 @@ Route::prefix('courses')->group(function () {
     Route::post('/create', [CourseController::class, 'create']);
     Route::put('/update/{id}', [CourseController::class, 'update']);
     Route::delete('/delete/{id}', [CourseController::class, 'delete']);
+});
+
+Route::prefix('hr-documents')->group(function () {
+    Route::get('/', [HrDocumentController::class, 'index']);
+    Route::get('/{id}', [HrDocumentController::class, 'show']);
+    Route::post('/create', [HrDocumentController::class, 'create']);
+    Route::put('/update/{id}', [HrDocumentController::class, 'update']);
+    Route::delete('/delete/{id}', [HrDocumentController::class, 'delete']);
+    Route::get('download/{id}', [HrDocumentController::class, 'download']);
 });
