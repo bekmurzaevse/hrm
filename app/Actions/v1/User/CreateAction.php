@@ -26,7 +26,7 @@ class CreateAction
             'password' => $dto->password,
         ];
 
-        $user = User::create($data);
+        User::create($data);
 
         return static::toResponse(
             message: 'User created'

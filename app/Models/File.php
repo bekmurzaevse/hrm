@@ -3,21 +3,17 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Vacancy extends Model
+class File extends Model
 {
     use SoftDeletes;
 
     protected $fillable = [
-        'title',
-        'requirements',
-        'salary',
-        'deadline',
-        'recruiter_id',
-        'project_id',
-        'status',
+        'name',
+        'path',
+        'type',
+        'size',
         'description',
     ];
 
@@ -34,17 +30,11 @@ class Vacancy extends Model
     }
 
     /**
-     * Summary of recruiter
-     * @return BelongsTo<User, Vacancy>
+     * Summary of attachable
+     * @return MorphTo<Model, Attachment>
      */
-    public function recruiter(): BelongsTo
+    public function fileable(): MorphTo
     {
-        return $this->belongsTo(User::class);
-    }
-
-
-    public function project(): BelongsTo
-    {
-        return $this->belongsTo(Project::class);
+        return $this->morphTo();
     }
 }
