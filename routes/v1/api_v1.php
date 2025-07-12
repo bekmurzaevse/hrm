@@ -11,6 +11,7 @@ use App\Http\Controllers\v1\InterActionController;
 use App\Http\Controllers\v1\ProjectController;
 use App\Http\Controllers\v1\RecruitmentFunnelStageController;
 use App\Http\Controllers\v1\TestController;
+use App\Http\Controllers\v1\TestResultController;
 use App\Http\Controllers\v1\UserController;
 use App\Http\Controllers\v1\VacancyController;
 use Illuminate\Support\Facades\Route;
@@ -130,4 +131,12 @@ Route::prefix('tests')->group(function () {
     Route::post('/create', [TestController::class, 'create']);
     Route::put('/update/{id}', [TestController::class, 'update']);
     Route::delete('/delete/{id}', [TestController::class, 'delete']);
+});
+
+Route::prefix('test-results')->group(function () {
+    Route::get('/', [TestResultController::class, 'index']);
+    Route::get('/{id}', [TestResultController::class, 'show']);
+    Route::post('/create', [TestResultController::class, 'create']);
+    Route::put('/update/{id}', [TestResultController::class, 'update']);
+    Route::delete('/delete/{id}', [TestResultController::class, 'delete']);
 });

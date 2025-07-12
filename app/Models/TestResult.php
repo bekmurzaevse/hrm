@@ -35,4 +35,16 @@ class TestResult extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function course()
+    {
+        return $this->hasOneThrough(
+            Course::class,  
+            Test::class,    
+            'id',         
+            'id',         
+            'test_id',      // TestResult modeldegi foreign key (test_id)
+            'course_id'     // Test modeldegi foreign key (course_id)
+        );
+    }
 }
