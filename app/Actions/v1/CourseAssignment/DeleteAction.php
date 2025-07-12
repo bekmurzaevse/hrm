@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Actions\v1\Course;
+namespace App\Actions\v1\CourseAssignment;
 
-use App\Exceptions\ApiResponseException;
-use App\Models\Course;
+use App\Models\CourseAssignment;
 use App\Traits\ResponseTrait;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Exceptions\ApiResponseException;
 
 class DeleteAction
 {
@@ -21,14 +21,14 @@ class DeleteAction
     public function __invoke(int $id): JsonResponse
     {
         try {
-            $course = Course::findOrFail($id);
-            $course->delete();
+            $assignment = CourseAssignment::findOrFail($id);
+            $assignment->delete();
 
             return static::toResponse(
-                message: "$id - id li Course O'shirildi",
+                message: 'Assignment Deleted',
             );
         } catch (ModelNotFoundException $ex) {
-            throw new ApiResponseException('Course Not Found', 404);
+            throw new ApiResponseException('Assignment Not Found', 404);
         }
     }
 }

@@ -32,7 +32,7 @@ class UpdateAction
             ]);
 
             return static::toResponse(
-                message: 'Course Updated',
+                message: "$id - id li course janalandi",
                 data: new CourseResource($course)
             );
         } catch (ModelNotFoundException $ex) {

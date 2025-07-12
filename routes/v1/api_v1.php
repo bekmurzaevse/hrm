@@ -1,11 +1,15 @@
 <?php
 
+use App\Http\Controllers\v1\ApplicationController;
 use App\Http\Controllers\v1\ClientController;
+use App\Http\Controllers\v1\CourseAssignmentController;
 use App\Http\Controllers\v1\CourseController;
 use App\Http\Controllers\v1\DealsController;
 use App\Http\Controllers\v1\HrDocumentController;
+use App\Http\Controllers\v1\FunnelLogController;
 use App\Http\Controllers\v1\InterActionController;
 use App\Http\Controllers\v1\ProjectController;
+use App\Http\Controllers\v1\RecruitmentFunnelStageController;
 use App\Http\Controllers\v1\UserController;
 use App\Http\Controllers\v1\VacancyController;
 use Illuminate\Support\Facades\Route;
@@ -86,4 +90,36 @@ Route::prefix('hr-documents')->group(function () {
     Route::put('/update/{id}', [HrDocumentController::class, 'update']);
     Route::delete('/delete/{id}', [HrDocumentController::class, 'delete']);
     Route::get('download/{id}', [HrDocumentController::class, 'download']);
+});
+
+Route::prefix('course-assignments')->group(function () {
+    Route::get('/', [CourseAssignmentController::class, 'index']);
+    Route::get('/{id}', [CourseAssignmentController::class, 'show']);
+    Route::post('/create', [CourseAssignmentController::class, 'create']);
+    Route::put('/update/{id}', [CourseAssignmentController::class, 'update']);
+    Route::delete('/delete/{id}', [CourseAssignmentController::class, 'delete']);
+});
+
+Route::prefix('recruitment-funnel-stages')->group(function () {
+    Route::get('/', [RecruitmentFunnelStageController::class, 'index']);
+    Route::get('/{id}', [RecruitmentFunnelStageController::class, 'show']);
+    Route::post('/create', [RecruitmentFunnelStageController::class, 'create']);
+    Route::put('/update/{id}', [RecruitmentFunnelStageController::class, 'update']);
+    Route::delete('/delete/{id}', [RecruitmentFunnelStageController::class, 'delete']);
+});
+
+Route::prefix('funnel-logs')->group(function () {
+    Route::get('/', [FunnelLogController::class, 'index']);
+    Route::get('/{id}', [FunnelLogController::class, 'show']);
+    Route::post('/create', [FunnelLogController::class, 'create']);
+    Route::put('/update/{id}', [FunnelLogController::class, 'update']);
+    Route::delete('/delete/{id}', [FunnelLogController::class, 'delete']);
+});
+
+Route::prefix('applications')->group(function () {
+    Route::get('/', [ApplicationController::class, 'index']);
+    Route::get('/{id}', [ApplicationController::class, 'show']);
+    Route::post('/create', [ApplicationController::class, 'create']);
+    Route::put('/update/{id}', [ApplicationController::class, 'update']);
+    Route::delete('/delete/{id}', [ApplicationController::class, 'delete']);
 });
