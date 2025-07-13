@@ -5,6 +5,7 @@ use App\Http\Controllers\v1\ClientController;
 use App\Http\Controllers\v1\CourseAssignmentController;
 use App\Http\Controllers\v1\CourseController;
 use App\Http\Controllers\v1\DealsController;
+use App\Http\Controllers\v1\FinanceController;
 use App\Http\Controllers\v1\FunnelLogController;
 use App\Http\Controllers\v1\InterActionController;
 use App\Http\Controllers\v1\KpiRecordController;
@@ -140,4 +141,12 @@ Route::prefix('kpi-records')->group(function () {
     Route::post('/create', [KpiRecordController::class, 'create']);
     Route::put('/update/{id}', [KpiRecordController::class, 'update']);
     Route::delete('/delete/{id}', [KpiRecordController::class, 'delete']);
+});
+
+Route::prefix('finances')->group(function () {
+    Route::get('/', [FinanceController::class, 'index']);
+    Route::get('/{id}', [FinanceController::class, 'show']);
+    Route::post('/create', [FinanceController::class, 'create']);
+    Route::put('/update/{id}', [FinanceController::class, 'update']);
+    Route::delete('/delete/{id}', [FinanceController::class, 'delete']);
 });
