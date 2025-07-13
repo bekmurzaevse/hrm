@@ -4,12 +4,15 @@ use App\Http\Controllers\v1\ApplicationController;
 use App\Http\Controllers\v1\ClientController;
 use App\Http\Controllers\v1\CourseAssignmentController;
 use App\Http\Controllers\v1\CourseController;
+use App\Http\Controllers\v1\CourseMaterialController;
 use App\Http\Controllers\v1\DealsController;
 use App\Http\Controllers\v1\HrDocumentController;
 use App\Http\Controllers\v1\FunnelLogController;
 use App\Http\Controllers\v1\InterActionController;
 use App\Http\Controllers\v1\ProjectController;
 use App\Http\Controllers\v1\RecruitmentFunnelStageController;
+use App\Http\Controllers\v1\TestController;
+use App\Http\Controllers\v1\TestResultController;
 use App\Http\Controllers\v1\UserController;
 use App\Http\Controllers\v1\VacancyController;
 use Illuminate\Support\Facades\Route;
@@ -97,6 +100,7 @@ Route::prefix('course-assignments')->group(function () {
     Route::get('/{id}', [CourseAssignmentController::class, 'show']);
     Route::post('/create', [CourseAssignmentController::class, 'create']);
     Route::put('/update/{id}', [CourseAssignmentController::class, 'update']);
+    Route::put('/complete/{id}', [CourseAssignmentController::class, 'complete']);
     Route::delete('/delete/{id}', [CourseAssignmentController::class, 'delete']);
 });
 
@@ -122,4 +126,28 @@ Route::prefix('applications')->group(function () {
     Route::post('/create', [ApplicationController::class, 'create']);
     Route::put('/update/{id}', [ApplicationController::class, 'update']);
     Route::delete('/delete/{id}', [ApplicationController::class, 'delete']);
+});
+
+Route::prefix('course-materials')->group(function () {
+    Route::get('/', [CourseMaterialController::class, 'index']);
+    Route::get('/{id}', [CourseMaterialController::class, 'show']);
+    Route::post('/create', [CourseMaterialController::class, 'create']);
+    Route::put('/update/{id}', [CourseMaterialController::class, 'update']);
+    Route::delete('/delete/{id}', [CourseMaterialController::class, 'delete']);
+});
+
+Route::prefix('tests')->group(function () {
+    Route::get('/', [TestController::class, 'index']);
+    Route::get('/{id}', [TestController::class, 'show']);
+    Route::post('/create', [TestController::class, 'create']);
+    Route::put('/update/{id}', [TestController::class, 'update']);
+    Route::delete('/delete/{id}', [TestController::class, 'delete']);
+});
+
+Route::prefix('test-results')->group(function () {
+    Route::get('/', [TestResultController::class, 'index']);
+    Route::get('/{id}', [TestResultController::class, 'show']);
+    Route::post('/create', [TestResultController::class, 'create']);
+    Route::put('/update/{id}', [TestResultController::class, 'update']);
+    Route::delete('/delete/{id}', [TestResultController::class, 'delete']);
 });

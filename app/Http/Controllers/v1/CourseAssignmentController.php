@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\v1;
 
+use App\Actions\v1\CourseAssignment\CompleteAction;
 use App\Actions\v1\CourseAssignment\CreateAction;
 use App\Actions\v1\CourseAssignment\DeleteAction;
 use App\Actions\v1\CourseAssignment\IndexAction;
@@ -59,6 +60,17 @@ class CourseAssignmentController extends Controller
     public function update(int $id, UpdateRequest $request, UpdateAction $action): JsonResponse
     {
         return $action($id, UpdateDto::from($request));
+    }
+
+    /**
+     * Summary of complete
+     * @param int $id
+     * @param \App\Actions\v1\CourseAssignment\CompleteAction $action
+     * @return JsonResponse
+     */
+    public function complete(int $id, CompleteAction $action): JsonResponse
+    {
+        return $action($id);
     }
 
     /**

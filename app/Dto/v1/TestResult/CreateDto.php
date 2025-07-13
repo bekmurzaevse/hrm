@@ -1,27 +1,28 @@
 <?php
 
-namespace App\Dto\v1\CourseAssignment;
+namespace App\Dto\v1\TestResult;
 
-use App\Http\Requests\v1\CourseAssignment\CreateRequest;
+use App\Http\Requests\v1\TestResult\CreateRequest;
 
 readonly class CreateDto
 {
     public function __construct(
-        public int $courseId,
+        public int $testId,
         public int $userId,
-    ) {
-    }
+        public float $score,
+    ) {}
 
     /**
      * Summary of from
-     * @param \App\Http\Requests\v1\CourseAssignment\CreateRequest $request
+     * @param \App\Http\Requests\v1\TestResult\CreateRequest $request
      * @return CreateDto
      */
     public static function from(CreateRequest $request): self
     {
         return new self(
-            courseId: $request->course_id,
+            testId: $request->test_id,
             userId: $request->user_id,
+            score: $request->score,
         );
     }
 }
