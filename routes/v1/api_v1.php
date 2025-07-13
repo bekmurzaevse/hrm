@@ -7,6 +7,7 @@ use App\Http\Controllers\v1\CourseController;
 use App\Http\Controllers\v1\DealsController;
 use App\Http\Controllers\v1\FunnelLogController;
 use App\Http\Controllers\v1\InterActionController;
+use App\Http\Controllers\v1\KpiRecordController;
 use App\Http\Controllers\v1\ProjectController;
 use App\Http\Controllers\v1\RecruitmentFunnelStageController;
 use App\Http\Controllers\v1\ReportController;
@@ -131,4 +132,12 @@ Route::prefix('tasks')->group(function () {
     Route::post('/create', [TaskController::class, 'create']);
     Route::put('/update/{id}', [TaskController::class, 'update']);
     Route::delete('/delete/{id}', [TaskController::class, 'delete']);
+});
+
+Route::prefix('kpi-records')->group(function () {
+    Route::get('/', [KpiRecordController::class, 'index']);
+    Route::get('/{id}', [KpiRecordController::class, 'show']);
+    Route::post('/create', [KpiRecordController::class, 'create']);
+    Route::put('/update/{id}', [KpiRecordController::class, 'update']);
+    Route::delete('/delete/{id}', [KpiRecordController::class, 'delete']);
 });
