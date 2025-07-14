@@ -4,13 +4,13 @@ namespace App\Actions\v1\Report;
 
 use App\Dto\v1\Report\UpdateDto;
 use App\Exceptions\ApiResponseException;
+use App\Helpers\FileUploadHelper;
 use App\Http\Resources\v1\Report\ReportResource;
 use App\Models\Report;
 use App\Traits\ResponseTrait;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 class UpdateAction
 {
@@ -33,12 +33,7 @@ class UpdateAction
             }
 
             $file = $dto->file;
-
-            $originalFilename = $file->getClientOriginalName();
-            $fileName = pathinfo($originalFilename, PATHINFO_FILENAME);
-            $fileName = $fileName . '_' . Str::random(10) . '_' . now()->format('Y-m-d-H:i:s') . '.' . $file->extension();
-
-            $savedPath = Storage::disk('public')->putFileAs('reports', $file, $fileName);
+            $savedPath = FileUploadHelper::file($file, 'reports');
 
             $data->update([
                 'title' => $dto->title,

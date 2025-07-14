@@ -3,11 +3,10 @@
 namespace App\Actions\v1\Report;
 
 use App\Dto\v1\Report\CreateDto;
+use App\Helpers\FileUploadHelper;
 use App\Models\Report;
 use App\Traits\ResponseTrait;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 class CreateAction
 {
@@ -21,12 +20,7 @@ class CreateAction
     public function __invoke(CreateDto $dto): JsonResponse
     {
         $file = $dto->file;
-
-        $originalFilename = $file->getClientOriginalName();
-        $fileName = pathinfo($originalFilename, PATHINFO_FILENAME);
-        $fileName = $fileName . '_' . Str::random(10) . '_' . now()->format('Y-m-d-H:i:s') . '.' . $file->extension();
-
-        $savedPath = Storage::disk('public')->putFileAs('reports', $file, $fileName);
+        $savedPath = FileUploadHelper::file($file, 'reports');
 
         $data = [
             'title' => $dto->title,
