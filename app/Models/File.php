@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class File extends Model
@@ -30,8 +31,8 @@ class File extends Model
     }
 
     /**
-     * Summary of attachable
-     * @return MorphTo<Model, Attachment>
+     * Summary of fileable
+     * @return MorphTo<Model, File>
      */
     public function fileable(): MorphTo
     {
