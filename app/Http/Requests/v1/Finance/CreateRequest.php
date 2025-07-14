@@ -25,9 +25,9 @@ class CreateRequest extends FormRequest
             'type' => 'required|string|max:255',
             'client_id' => 'required|integer|exists:clients,id',
             'vacancy_id' => 'required|integer|exists:vacancies,id',
-            'amount' => 'required|float',
+            'amount' => 'required|numeric|between:0,9999999999.99',
             'category' => 'required|string|max:255',
-            'note' => 'required|string|6000',
+            'note' => 'required|string|max:6000',
             'date' => 'required|date_format:Y-m-d',
         ];
     }
@@ -49,7 +49,7 @@ class CreateRequest extends FormRequest
             'vacancy_id.integer' => 'vacancy_id integer boliwi kerek.',
             'vacancy_id.exists' => 'vacancy_id bazadan tawilmadi.',
             'amount.required' => "amount ma'jburiy.",
-            'amount.string' => 'amount float boliwi kerek.',
+            'amount.string' => 'amount numeric 12 xanali san boliwi kerek.',
             'category.required' => "category ma'jburiy.",
             'category.string' => 'category string boliwi kerek.',
             'category.max' => 'category 255 belgiden aspawi kerk.',

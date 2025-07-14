@@ -26,8 +26,8 @@ readonly class UpdateDto
     {
         return new self(
             type: $request->get('type'),
-            clientId: $request->get('clientId'),
-            vacancyId: $request->get('vacancyId'),
+            clientId: $request->get('client_id'),
+            vacancyId: $request->get('vacancy_id'),
             amount: $request->get('amount'),
             category: $request->get('category'),
             note: $request->get('note'),
