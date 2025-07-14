@@ -8,6 +8,7 @@ use App\Http\Controllers\v1\CourseMaterialController;
 use App\Http\Controllers\v1\DealsController;
 use App\Http\Controllers\v1\HrDocumentController;
 use App\Http\Controllers\v1\FunnelLogController;
+use App\Http\Controllers\v1\HrOrderController;
 use App\Http\Controllers\v1\InterActionController;
 use App\Http\Controllers\v1\ProjectController;
 use App\Http\Controllers\v1\RecruitmentFunnelStageController;
@@ -93,6 +94,15 @@ Route::prefix('hr-documents')->group(function () {
     Route::put('/update/{id}', [HrDocumentController::class, 'update']);
     Route::delete('/delete/{id}', [HrDocumentController::class, 'delete']);
     Route::get('download/{id}', [HrDocumentController::class, 'download']);
+});
+
+Route::prefix('hr-orders')->group(function () {
+    Route::get('/', [HrOrderController::class, 'index']);
+    Route::get('/{id}', [HrOrderController::class, 'show']);
+    Route::post('/create', [HrOrderController::class, 'create']);
+    Route::put('/update/{id}', [HrOrderController::class, 'update']);
+    Route::delete('/delete/{id}', [HrOrderController::class, 'delete']);
+    Route::get('download/{id}', [HrOrderController::class, 'download']);
 });
 
 Route::prefix('course-assignments')->group(function () {

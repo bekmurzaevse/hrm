@@ -100,24 +100,6 @@ class User extends Authenticatable
         return $this->hasMany(Project::class);
     }
 
-    // /**
-    //  * Summary of hrDocuments
-    //  * @return HasMany<HrDocument, User>
-    //  */
-    // public function hrDocuments(): HasMany
-    // {
-    //     return $this->hasMany(HrDocument::class);
-    // }
-
-    /**
-     * Summary of hrOrders
-     * @return HasMany<HrOrder, User>
-     */
-    public function hrOrders(): HasMany
-    {
-        return $this->hasMany(HrOrder::class);
-    }
-
     public function testResults(): HasMany
     {
         return $this->hasMany(TestResult::class);
@@ -135,6 +117,11 @@ class User extends Authenticatable
     public function hrDocuments(): MorphMany
     {
         return $this->morphMany(File::class, 'fileable')->where('type', 'hr_document');
+    }
+
+    public function hrOrders(): MorphMany
+    {
+        return $this->morphMany(File::class, 'fileable')->where('type', 'hr_order');
     }
 
 }

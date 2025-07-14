@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Actions\v1\HrDocument;
+namespace App\Actions\v1\HrOrder;
 
-use App\Dto\v1\HrDocument\CreateDto;
+use App\Dto\v1\HrOrder\CreateDto;
 use App\Helpers\FileUploadHelper;
 use App\Models\User;
 use App\Traits\ResponseTrait;
@@ -14,24 +14,24 @@ class CreateAction
 
     /**
      * Summary of __invoke
-     * @param \App\Dto\v1\HrDocument\CreateDto $dto
+     * @param \App\Dto\v1\HrOrder\CreateDto $dto
      * @return JsonResponse
      */
     public function __invoke(CreateDto $dto): JsonResponse
     {
         $file = $dto->file;
-        $path = FileUploadHelper::file($file, 'hr_documents');
+        $path = FileUploadHelper::file($file, 'hr_orders');
 
-        User::firstOrFail()->hrDocuments()->create([
+        User::firstOrFail()->hrOrders()->create([
             'name' => $dto->name,
             'path' => $path,
-            'type' => 'hr_document',
+            'type' => 'hr_order',
             'size' => $file->getSize(),
             'description' => $dto->description ?? null,
         ]);
 
         return static::toResponse(
-            message: 'HrDocument created'
+            message: 'HrOrder created'
         );
     }
 }
