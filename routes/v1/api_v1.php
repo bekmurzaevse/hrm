@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\v1\ApplicationController;
+use App\Http\Controllers\v1\CandidateController;
 use App\Http\Controllers\v1\ClientController;
 use App\Http\Controllers\v1\CourseAssignmentController;
 use App\Http\Controllers\v1\CourseController;
@@ -150,4 +151,12 @@ Route::prefix('test-results')->group(function () {
     Route::post('/create', [TestResultController::class, 'create']);
     Route::put('/update/{id}', [TestResultController::class, 'update']);
     Route::delete('/delete/{id}', [TestResultController::class, 'delete']);
+});
+
+Route::prefix('candidates')->group( function () {
+    Route::get('/', [CandidateController::class, 'index']);
+    Route::get('/{id}', [CandidateController::class, 'show']);
+    Route::post('/create', [CandidateController::class, 'create']);
+    Route::put('/update/{id}', [CandidateController::class, 'update']);
+    Route::delete('/delete/{id}', [CandidateController::class, 'delete']);
 });
