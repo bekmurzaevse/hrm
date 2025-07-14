@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\v1\HrDocument;
+namespace App\Http\Requests\v1\HrOrder;
 
 use Illuminate\Foundation\Http\FormRequest;
 

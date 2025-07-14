@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Actions\v1\HrDocument;
+namespace App\Actions\v1\HrOrder;
 
-use App\Dto\v1\HrDocument\UpdateDto;
+use App\Dto\v1\HrOrder\UpdateDto;
 use App\Exceptions\ApiResponseException;
 use App\Helpers\FileUploadHelper;
-use App\Http\Resources\v1\HrDocument\HrDocumentResource;
 use App\Models\User;
 use App\Traits\ResponseTrait;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -19,25 +18,25 @@ class UpdateAction
     /**
      * Summary of __invoke
      * @param int $id
-     * @param \App\Dto\v1\HrDocument\UpdateDto $dto
+     * @param \App\Dto\v1\HrOrder\UpdateDto $dto
      * @throws \App\Exceptions\ApiResponseException
      * @return JsonResponse
      */
     public function __invoke(int $id, UpdateDto $dto): JsonResponse
     {
         try {
-            $hrDocument = User::firstOrFail()->hrDocuments()->where('id', $id)->firstOrFail();
+            $hrOrder = User::firstOrFail()->hrOrders()->where('id', $id)->firstOrFail();
 
             $file = $dto->file;
-            $filePath = $hrDocument->path;
+            $filePath = $hrOrder->path;
 
             if (Storage::disk('public')->exists($filePath)) {
                 Storage::disk('public')->delete($filePath);
             }
 
-            $path = FileUploadHelper::file($file, 'hr_documents');
+            $path = FileUploadHelper::file($file, 'hr_orders');
 
-            User::firstOrFail()->hrDocuments()->where('id', $id)->update([
+            User::firstOrFail()->hrOrders()->where('id', $id)->update([
                     'name' => $dto->name,
                     'path' => $path,
                     'type' => 'hr_document',
@@ -46,10 +45,10 @@ class UpdateAction
                 ]);
 
             return static::toResponse(
-                message: 'HrDocument Updated',
+                message: 'HrOrder Updated',
             );
         } catch (ModelNotFoundException $ex) {
-            throw new ApiResponseException('HrDocument Not Found', 404);
+            throw new ApiResponseException('HrOrder Not Found', 404);
         }
     }
 }
