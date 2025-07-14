@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -99,14 +100,14 @@ class User extends Authenticatable
         return $this->hasMany(Project::class);
     }
 
-    /**
-     * Summary of hrDocuments
-     * @return HasMany<HrDocument, User>
-     */
-    public function hrDocuments(): HasMany
-    {
-        return $this->hasMany(HrDocument::class);
-    }
+    // /**
+    //  * Summary of hrDocuments
+    //  * @return HasMany<HrDocument, User>
+    //  */
+    // public function hrDocuments(): HasMany
+    // {
+    //     return $this->hasMany(HrDocument::class);
+    // }
 
     /**
      * Summary of hrOrders
@@ -125,6 +126,15 @@ class User extends Authenticatable
     public function candidateNotes(): HasMany
     {
         return $this->hasMany(CandidateNote::class);
+    }
+
+    /**
+     * Summary of hrDocuments
+     * @return MorphMany<File, User>
+     */
+    public function hrDocuments(): MorphMany
+    {
+        return $this->morphMany(File::class, 'fileable')->where('type', 'hr_document');
     }
 
 }

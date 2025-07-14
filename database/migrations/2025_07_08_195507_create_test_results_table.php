@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->integer('score')->default(0);
             $table->dateTime('taken_at')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

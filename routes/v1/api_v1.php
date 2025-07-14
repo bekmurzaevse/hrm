@@ -1,16 +1,21 @@
 <?php
 
 use App\Http\Controllers\v1\ApplicationController;
+use App\Http\Controllers\v1\CandidateController;
 use App\Http\Controllers\v1\ClientController;
 use App\Http\Controllers\v1\CourseAssignmentController;
 use App\Http\Controllers\v1\CourseController;
+use App\Http\Controllers\v1\CourseMaterialController;
 use App\Http\Controllers\v1\DealsController;
+use App\Http\Controllers\v1\HrDocumentController;
 use App\Http\Controllers\v1\FinanceController;
 use App\Http\Controllers\v1\FunnelLogController;
 use App\Http\Controllers\v1\InterActionController;
 use App\Http\Controllers\v1\KpiRecordController;
 use App\Http\Controllers\v1\ProjectController;
 use App\Http\Controllers\v1\RecruitmentFunnelStageController;
+use App\Http\Controllers\v1\TestController;
+use App\Http\Controllers\v1\TestResultController;
 use App\Http\Controllers\v1\ReportController;
 use App\Http\Controllers\v1\TaskController;
 use App\Http\Controllers\v1\UserController;
@@ -86,11 +91,21 @@ Route::prefix('courses')->group(function () {
     Route::delete('/delete/{id}', [CourseController::class, 'delete']);
 });
 
+Route::prefix('hr-documents')->group(function () {
+    Route::get('/', [HrDocumentController::class, 'index']);
+    Route::get('/{id}', [HrDocumentController::class, 'show']);
+    Route::post('/create', [HrDocumentController::class, 'create']);
+    Route::put('/update/{id}', [HrDocumentController::class, 'update']);
+    Route::delete('/delete/{id}', [HrDocumentController::class, 'delete']);
+    Route::get('download/{id}', [HrDocumentController::class, 'download']);
+});
+
 Route::prefix('course-assignments')->group(function () {
     Route::get('/', [CourseAssignmentController::class, 'index']);
     Route::get('/{id}', [CourseAssignmentController::class, 'show']);
     Route::post('/create', [CourseAssignmentController::class, 'create']);
     Route::put('/update/{id}', [CourseAssignmentController::class, 'update']);
+    Route::put('/complete/{id}', [CourseAssignmentController::class, 'complete']);
     Route::delete('/delete/{id}', [CourseAssignmentController::class, 'delete']);
 });
 
@@ -117,6 +132,39 @@ Route::prefix('applications')->group(function () {
     Route::put('/update/{id}', [ApplicationController::class, 'update']);
     Route::delete('/delete/{id}', [ApplicationController::class, 'delete']);
 });
+
+Route::prefix('course-materials')->group(function () {
+    Route::get('/', [CourseMaterialController::class, 'index']);
+    Route::get('/{id}', [CourseMaterialController::class, 'show']);
+    Route::post('/create', [CourseMaterialController::class, 'create']);
+    Route::put('/update/{id}', [CourseMaterialController::class, 'update']);
+    Route::delete('/delete/{id}', [CourseMaterialController::class, 'delete']);
+});
+
+Route::prefix('tests')->group(function () {
+    Route::get('/', [TestController::class, 'index']);
+    Route::get('/{id}', [TestController::class, 'show']);
+    Route::post('/create', [TestController::class, 'create']);
+    Route::put('/update/{id}', [TestController::class, 'update']);
+    Route::delete('/delete/{id}', [TestController::class, 'delete']);
+});
+
+Route::prefix('test-results')->group(function () {
+    Route::get('/', [TestResultController::class, 'index']);
+    Route::get('/{id}', [TestResultController::class, 'show']);
+    Route::post('/create', [TestResultController::class, 'create']);
+    Route::put('/update/{id}', [TestResultController::class, 'update']);
+    Route::delete('/delete/{id}', [TestResultController::class, 'delete']);
+});
+
+Route::prefix('candidates')->group(function () {
+    Route::get('/', [CandidateController::class, 'index']);
+    Route::get('/{id}', [CandidateController::class, 'show']);
+    Route::post('/create', [CandidateController::class, 'create']);
+    Route::put('/update/{id}', [CandidateController::class, 'update']);
+    Route::delete('/delete/{id}', [CandidateController::class, 'delete']);
+});
+
 
 Route::prefix('reports')->group(function () {
     Route::get('/', [ReportController::class, 'index']);

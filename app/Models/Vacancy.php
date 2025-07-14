@@ -42,12 +42,9 @@ class Vacancy extends Model
         return $this->belongsTo(User::class);
     }
 
-    /**
-     * Summary of project
-     * @return BelongsTo<User, Vacancy>
-     */
+
     public function project(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Project::class);
     }
 }
