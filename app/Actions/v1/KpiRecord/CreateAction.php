@@ -19,10 +19,10 @@ class CreateAction
     public function __invoke(CreateDto $dto): JsonResponse
     {
         $data = [
-            'candidate_id' => $dto->userId,
+            'user_id' => $dto->userId,
             'vacancy_id' => $dto->vacancyId,
-            'current_stage' => $dto->kpiScore,
-            'applied_at' => $dto->calculatedAt,
+            'kpi_score' => $dto->kpiScore,
+            'calculated_at' => $dto->calculatedAt,
         ];
 
         KpiRecord::create($data);

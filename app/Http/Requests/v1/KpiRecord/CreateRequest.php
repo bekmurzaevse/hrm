@@ -24,8 +24,7 @@ class CreateRequest extends FormRequest
         return [
             'user_id' => 'required|integer|exists:users,id',
             'vacancy_id' => 'required|integer|exists:vacancies,id',
-            'kpi_score' => 'required|float',
-            //TODO: check float or decimal
+            'kpi_score' => 'required|numeric|between:0,999.99',
             'calculated_at' => 'required|date_format:Y-m-d H:i',
         ];
     }
@@ -44,7 +43,7 @@ class CreateRequest extends FormRequest
             'vacancy_id.integer' => 'vacancy_id integer boliwi kerek.',
             'vacancy_id.exists' => 'vacancy_id bazadan tawilmadi.',
             'kpi_score.required' => "kpi_score ma'jburiy.",
-            'kpi_score.float' => 'title float boliwi kerek.',
+            'kpi_score.float' => 'kpi_score numeric 0 menen 999.99 arasinda boliwi kerek.',
             'calculated_at.required' => "calculated_at ma'jburiy.",
             'calculated_at.date_format' => 'calculated_at format Y-m-d H:i boliwi kerek.',
         ];

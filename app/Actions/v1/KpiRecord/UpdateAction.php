@@ -26,10 +26,10 @@ class UpdateAction
         try {
             $data = KpiRecord::findOrFail($id);
             $data->update([
-                'candidate_id' => $dto->userId,
+                'user_id' => $dto->userId,
                 'vacancy_id' => $dto->vacancyId,
-                'current_stage' => $dto->kpiScore,
-                'applied_at' => $dto->calculatedAt,
+                'kpi_score' => $dto->kpiScore,
+                'calculated_at' => $dto->calculatedAt,
             ]);
 
             return static::toResponse(

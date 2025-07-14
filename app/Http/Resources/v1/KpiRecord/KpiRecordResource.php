@@ -20,7 +20,7 @@ class KpiRecordResource extends JsonResource
             'id' => $this->id,
             'user' => new UserResource($this->user),
             'vacancy' => new VacancyResource($this->vacancy),
-            'kpi_record' => $this->kpi_record,
+            'kpi_score' => $this->kpi_score,
             'calculated_at' => $this->calculated_at->format('Y-m-d H:i:s'),
             'created_at' => $this->created_at->format('Y-m-d H:i:s'),
             'updated_at' => $this->updated_at->format('Y-m-d H:i:s'),
