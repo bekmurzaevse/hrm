@@ -30,7 +30,7 @@ class CreateRequest extends FormRequest
 
     /**
      * Summary of messages
-     * @return array{contact_info.required: string, contact_info.string: string, created_by.required: string, created_by.unique: string, name.required: string, name.string: string, name.unique: string}
+     * @return array{application_id.exists: string, application_id.integer: string, application_id.required: string, moved_by.exists: string, moved_by.integer: string, moved_by.required: string, stage_id.exists: string, stage_id.integer: string, stage_id.required: string}
      */
     public function messages(): array
     {

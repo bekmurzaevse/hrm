@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Http\Resources\v1\FunnelLog;
+namespace App\Http\Resources\v1\KpiRecord;
 
-use App\Http\Resources\v1\Application\ApplicationResource;
-use App\Http\Resources\v1\RecruitmentFunnelStage\RecruitmentFunnelStageResource;
 use App\Http\Resources\v1\User\UserResource;
+use App\Http\Resources\v1\Vacancy\VacancyResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class FunnelLogResource extends JsonResource
+class KpiRecordResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -19,10 +18,10 @@ class FunnelLogResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'application' => new ApplicationResource($this->application),
-            'stage' => new RecruitmentFunnelStageResource($this->stage),
-            'moved_by' => new UserResource($this->movedBy),
-            'moved_at' => $this->moved_at->format('Y-m-d H:i:s'),
+            'user' => new UserResource($this->user),
+            'vacancy' => new VacancyResource($this->vacancy),
+            'kpi_score' => $this->kpi_score,
+            'calculated_at' => $this->calculated_at->format('Y-m-d H:i:s'),
             'created_at' => $this->created_at->format('Y-m-d H:i:s'),
             'updated_at' => $this->updated_at->format('Y-m-d H:i:s'),
         ];
