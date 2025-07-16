@@ -47,7 +47,6 @@ class UpdateAction
 
             return static::toResponse(
                 message: 'HrDocument Updated',
-                data: new HrDocumentResource($hrDocument)
             );
         } catch (ModelNotFoundException $ex) {
             throw new ApiResponseException('HrDocument Not Found', 404);

@@ -10,12 +10,17 @@ use App\Http\Controllers\v1\CourseController;
 use App\Http\Controllers\v1\CourseMaterialController;
 use App\Http\Controllers\v1\DealsController;
 use App\Http\Controllers\v1\HrDocumentController;
+use App\Http\Controllers\v1\FinanceController;
 use App\Http\Controllers\v1\FunnelLogController;
+use App\Http\Controllers\v1\HrOrderController;
 use App\Http\Controllers\v1\InterActionController;
+use App\Http\Controllers\v1\KpiRecordController;
 use App\Http\Controllers\v1\ProjectController;
 use App\Http\Controllers\v1\RecruitmentFunnelStageController;
 use App\Http\Controllers\v1\TestController;
 use App\Http\Controllers\v1\TestResultController;
+use App\Http\Controllers\v1\ReportController;
+use App\Http\Controllers\v1\TaskController;
 use App\Http\Controllers\v1\UserController;
 use App\Http\Controllers\v1\VacancyController;
 use Illuminate\Support\Facades\Route;
@@ -98,6 +103,15 @@ Route::prefix('hr-documents')->group(function () {
     Route::get('download/{id}', [HrDocumentController::class, 'download']);
 });
 
+Route::prefix('hr-orders')->group(function () {
+    Route::get('/', [HrOrderController::class, 'index']);
+    Route::get('/{id}', [HrOrderController::class, 'show']);
+    Route::post('/create', [HrOrderController::class, 'create']);
+    Route::put('/update/{id}', [HrOrderController::class, 'update']);
+    Route::delete('/delete/{id}', [HrOrderController::class, 'delete']);
+    Route::get('download/{id}', [HrOrderController::class, 'download']);
+});
+
 Route::prefix('course-assignments')->group(function () {
     Route::get('/', [CourseAssignmentController::class, 'index']);
     Route::get('/{id}', [CourseAssignmentController::class, 'show']);
@@ -155,7 +169,7 @@ Route::prefix('test-results')->group(function () {
     Route::delete('/delete/{id}', [TestResultController::class, 'delete']);
 });
 
-Route::prefix('candidates')->group( function () {
+Route::prefix('candidates')->group(function () {
     Route::get('/', [CandidateController::class, 'index']);
     Route::get('/{id}', [CandidateController::class, 'show']);
     Route::post('/create', [CandidateController::class, 'create']);
@@ -178,4 +192,37 @@ Route::prefix('candidate-documents')->group(function () {
     Route::put('/update/{id}', [CandidateDocumentController::class, 'update']);
     Route::delete('/delete/{id}', [CandidateDocumentController::class, 'delete']);
     Route::get('/download/{id}', [CandidateDocumentController::class, 'download']);
+});
+
+Route::prefix('reports')->group(function () {
+    Route::get('/', [ReportController::class, 'index']);
+    Route::get('/{id}', [ReportController::class, 'show']);
+    Route::post('/create', [ReportController::class, 'create']);
+    Route::put('/update/{id}', [ReportController::class, 'update']);
+    Route::delete('/delete/{id}', [ReportController::class, 'delete']);
+    Route::get('download/{id}', [ReportController::class, 'download']);
+});
+
+Route::prefix('tasks')->group(function () {
+    Route::get('/', [TaskController::class, 'index']);
+    Route::get('/{id}', [TaskController::class, 'show']);
+    Route::post('/create', [TaskController::class, 'create']);
+    Route::put('/update/{id}', [TaskController::class, 'update']);
+    Route::delete('/delete/{id}', [TaskController::class, 'delete']);
+});
+
+Route::prefix('kpi-records')->group(function () {
+    Route::get('/', [KpiRecordController::class, 'index']);
+    Route::get('/{id}', [KpiRecordController::class, 'show']);
+    Route::post('/create', [KpiRecordController::class, 'create']);
+    Route::put('/update/{id}', [KpiRecordController::class, 'update']);
+    Route::delete('/delete/{id}', [KpiRecordController::class, 'delete']);
+});
+
+Route::prefix('finances')->group(function () {
+    Route::get('/', [FinanceController::class, 'index']);
+    Route::get('/{id}', [FinanceController::class, 'show']);
+    Route::post('/create', [FinanceController::class, 'create']);
+    Route::put('/update/{id}', [FinanceController::class, 'update']);
+    Route::delete('/delete/{id}', [FinanceController::class, 'delete']);
 });

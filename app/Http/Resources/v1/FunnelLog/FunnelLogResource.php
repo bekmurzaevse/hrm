@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\v1\FunnelLog;
 
+use App\Http\Resources\v1\Application\ApplicationResource;
 use App\Http\Resources\v1\RecruitmentFunnelStage\RecruitmentFunnelStageResource;
 use App\Http\Resources\v1\User\UserResource;
 use Illuminate\Http\Request;
@@ -18,9 +19,7 @@ class FunnelLogResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            // 'application' => new ApplicationResource($this->application), 
-            // TODO: implement ApplicationResource
-            'application_id' => $this->application_id,
+            'application' => new ApplicationResource($this->application),
             'stage' => new RecruitmentFunnelStageResource($this->stage),
             'moved_by' => new UserResource($this->movedBy),
             'moved_at' => $this->moved_at->format('Y-m-d H:i:s'),

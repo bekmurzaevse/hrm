@@ -31,7 +31,7 @@ class UpdateRequest extends FormRequest
 
     /**
      * Summary of messages
-     * @return array{contact_info.required: string, contact_info.string: string, created_by.exists: string, created_by.required: string, name.required: string, name.string: string, name.unique: string}
+     * @return array{applied_at.date: string, applied_at.required: string, candidate_id.exists: string, candidate_id.integer: string, candidate_id.required: string, current_stage.exists: string, current_stage.integer: string, current_stage.required: string, vacancy_id.exists: string, vacancy_id.integer: string, vacancy_id.required: string}
      */
     public function messages(): array
     {
