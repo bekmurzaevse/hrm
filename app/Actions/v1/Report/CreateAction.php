@@ -19,17 +19,26 @@ class CreateAction
      */
     public function __invoke(CreateDto $dto): JsonResponse
     {
-        $file = $dto->file;
-        $savedPath = FileUploadHelper::file($file, 'reports');
-
         $data = [
             'title' => $dto->title,
             'type' => $dto->type,
             'generated_by' => $dto->generatedBy,
-            'file_path' => $savedPath,
         ];
 
-        Report::create($data);
+        $item = Report::create($data);
+
+        $file = $dto->file;
+        $savedPath = FileUploadHelper::file($file, 'reports/' . $item->id);
+
+        $item->file()->create([
+            'name' => $file->getClientOriginalName(),
+            'path' => $savedPath,
+            'type' => $file->getClientMimeType(),
+            'size' => $file->getSize(),
+            'fileable_type' => Report::class,
+            'fileable_id' => $item->id,
+            'description' => $dto->description,
+        ]);
 
         return static::toResponse(
             message: 'Report created'

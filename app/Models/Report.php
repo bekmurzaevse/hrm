@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Report extends Model
@@ -14,7 +15,6 @@ class Report extends Model
         'title',
         'type',
         'generated_by',
-        'file_path',
     ];
 
     /**
@@ -36,5 +36,14 @@ class Report extends Model
     public function generatedBy(): BelongsTo
     {
         return $this->belongsTo(related: User::class, foreignKey: 'generated_by');
-    }   
+    }
+
+    /**
+     * Summary of file
+     * @return MorphOne<File, Report>
+     */
+    public function file(): MorphOne
+    {
+        return $this->morphOne(File::class, 'fileable');
+    }
 }
