@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\v1\ApplicationController;
 use App\Http\Controllers\v1\CandidateController;
+use App\Http\Controllers\v1\CandidateDocumentController;
+use App\Http\Controllers\v1\CandidateNoteController;
 use App\Http\Controllers\v1\ClientController;
 use App\Http\Controllers\v1\CourseAssignmentController;
 use App\Http\Controllers\v1\CourseController;
@@ -159,4 +161,21 @@ Route::prefix('candidates')->group( function () {
     Route::post('/create', [CandidateController::class, 'create']);
     Route::put('/update/{id}', [CandidateController::class, 'update']);
     Route::delete('/delete/{id}', [CandidateController::class, 'delete']);
+});
+
+Route::prefix('candidate-notes')->group(function () {
+    Route::get('/', [CandidateNoteController::class, 'index']);
+    Route::get('/{id}', [CandidateNoteController::class, 'show']);
+    Route::post('/create', [CandidateNoteController::class, 'create']);
+    Route::put('/update/{id}', [CandidateNoteController::class, 'update']);
+    Route::delete('/delete/{id}', [CandidateNoteController::class, 'delete']);
+});
+
+Route::prefix('candidate-documents')->group(function () {
+    Route::get('/', [CandidateDocumentController::class, 'index']);
+    Route::get('/{id}', [CandidateDocumentController::class, 'show']);
+    Route::post('/create', [CandidateDocumentController::class, 'create']);
+    Route::put('/update/{id}', [CandidateDocumentController::class, 'update']);
+    Route::delete('/delete/{id}', [CandidateDocumentController::class, 'delete']);
+    Route::get('/download/{id}', [CandidateDocumentController::class, 'download']);
 });
