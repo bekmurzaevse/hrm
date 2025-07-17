@@ -9,9 +9,17 @@ use App\Actions\v1\HrDocument\IndexAction;
 use App\Actions\v1\HrDocument\ShowAction;
 use App\Actions\v1\HrDocument\UpdateAction;
 use App\Dto\v1\HrDocument\CreateDto;
+use App\Dto\v1\HrDocument\DeleteDto;
+use App\Dto\v1\HrDocument\DownloadDto;
+use App\Dto\v1\HrDocument\IndexDto;
+use App\Dto\v1\HrDocument\ShowDto;
 use App\Dto\v1\HrDocument\UpdateDto;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\v1\HrDocument\CreateRequest;
+use App\Http\Requests\v1\HrDocument\DeleteRequest;
+use App\Http\Requests\v1\HrDocument\DownloadRequest;
+use App\Http\Requests\v1\HrDocument\IndexRequest;
+use App\Http\Requests\v1\HrDocument\ShowRequest;
 use App\Http\Requests\v1\HrDocument\UpdateRequest;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\StreamedResponse;
@@ -21,23 +29,18 @@ class HrDocumentController extends Controller
 
     /**
      * Summary of index
+     * @param \App\Http\Requests\v1\HrDocument\IndexRequest $request
      * @param \App\Actions\v1\HrDocument\IndexAction $action
      * @return JsonResponse
      */
-    public function index(IndexAction $action): JsonResponse
+    public function index(IndexRequest $request, IndexAction $action): JsonResponse
     {
-        return $action();
+        return $action(IndexDto::from($request));
     }
 
-    /**
-     * Summary of show
-     * @param int $id
-     * @param \App\Actions\v1\HrDocument\ShowAction $action
-     * @return JsonResponse
-     */
-    public function show(int $id, ShowAction $action): JsonResponse
+    public function show(int $id, ShowRequest $request, ShowAction $action): JsonResponse
     {
-        return $action($id);
+        return $action($id, ShowDto::from($request));
     }
 
     /**
@@ -66,22 +69,24 @@ class HrDocumentController extends Controller
     /**
      * Summary of delete
      * @param int $id
+     * @param \App\Http\Requests\v1\HrDocument\DeleteRequest $request
      * @param \App\Actions\v1\HrDocument\DeleteAction $action
      * @return JsonResponse
      */
-    public function delete(int $id, DeleteAction $action): JsonResponse
+    public function delete(int $id, DeleteRequest $request, DeleteAction $action): JsonResponse
     {
-        return $action($id);
+        return $action($id, DeleteDto::from($request));
     }
 
     /**
      * Summary of download
      * @param int $id
+     * @param \App\Http\Requests\v1\HrDocument\DownloadRequest $request
      * @param \App\Actions\v1\HrDocument\DownloadAction $action
-     * @return \Symfony\Component\HttpFoundation\StreamedResponse
+     * @return StreamedResponse
      */
-    public function download(int $id, DownloadAction $action): StreamedResponse
+    public function download(int $id, DownloadRequest $request, DownloadAction $action): StreamedResponse
     {
-        return $action($id);
+        return $action($id, DownloadDto::from(request: $request));
     }
 }
