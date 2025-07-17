@@ -2,6 +2,7 @@
 
 namespace App\Actions\v1\HrDocument;
 
+use App\Dto\v1\HrDocument\DownloadDto;
 use App\Exceptions\ApiResponseException;
 use App\Models\User;
 use App\Traits\ResponseTrait;
@@ -16,13 +17,14 @@ class DownloadAction
     /**
      * Summary of __invoke
      * @param int $id
+     * @param \App\Dto\v1\HrDocument\DownloadDto $dto
      * @throws \App\Exceptions\ApiResponseException
      * @return StreamedResponse
      */
-    public function __invoke(int $id): StreamedResponse
+    public function __invoke(int $id, DownloadDto $dto): StreamedResponse
     {
         try {
-            $hrDocument = User::firstOrFail()
+            $hrDocument = User::findOrFail($dto->userId)
                 ->hrDocuments()
                 ->where('id', $id)
                 ->firstOrFail();

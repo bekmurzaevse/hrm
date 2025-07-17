@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\v1\HrOrder;
+namespace App\Http\Requests\v1\HrDocument;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateRequest extends FormRequest
+class IndexRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,23 +22,17 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'nullable|string',
             'user_id' => 'required|integer|exists:users,id',
-            'description' => 'nullable|string',
-            'file' => 'required|file|mimes:pdf'
         ];
     }
 
     /**
      * Summary of messages
-     * @return array{file.file: string, file.mimes: string, file.required: string, user_id.exists: string, user_id.integer: string, user_id.required: string}
+     * @return array{user_id.exists: string, user_id.integer: string, user_id.required: string}
      */
     public function messages(): array
     {
         return [
-            'file.required' => 'Fayl ma\'jbu\'riy.',
-            'file.file' => 'Fayl bolıwı kerek.',
-            'file.mimes' => 'Fayl formati pdf bolıwı kerek.',
             'user_id.required' => "User id kiritiw ma'jbu'riy!",
             'user_id.integer' => "User id pu'tin san boliwi kerek!",
             'user_id.exists' => "Bunday user id bazada tabilmadi!",

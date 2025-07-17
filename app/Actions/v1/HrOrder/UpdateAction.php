@@ -25,7 +25,7 @@ class UpdateAction
     public function __invoke(int $id, UpdateDto $dto): JsonResponse
     {
         try {
-            $hrOrder = User::firstOrFail()->hrOrders()->where('id', $id)->firstOrFail();
+            $hrOrder = User::findOrFail($dto->userId)->hrOrders()->where('id', $id)->firstOrFail();
 
             $file = $dto->file;
             $filePath = $hrOrder->path;
@@ -36,10 +36,10 @@ class UpdateAction
 
             $path = FileUploadHelper::file($file, 'hr_orders');
 
-            User::firstOrFail()->hrOrders()->where('id', $id)->update([
+            User::findOrFail($dto->userId)->hrOrders()->where('id', $id)->update([
                     'name' => $dto->name,
                     'path' => $path,
-                    'type' => 'hr_document',
+                    'type' => 'hr_order',
                     'size' => $file->getSize(),
                     'description' => $dto->description ?? null,
                 ]);
