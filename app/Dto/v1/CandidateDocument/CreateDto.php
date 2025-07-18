@@ -11,6 +11,7 @@ readonly class CreateDto
     public function __construct(
         public ?string $name,
         public ?string $description,
+        public int $candidateId,
         public UploadedFile $file
     ) {}
 
@@ -19,6 +20,7 @@ readonly class CreateDto
         return new self(
             name: $request->get('name'),
             description: $request->get('description'),
+            candidateId: $request->get('candidate_id'),
             file: $request->file('file')
         );
     }

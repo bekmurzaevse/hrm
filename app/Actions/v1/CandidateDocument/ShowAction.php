@@ -2,6 +2,7 @@
 
 namespace App\Actions\v1\CandidateDocument;
 
+use App\Dto\v1\CandidateDocument\ShowDto;
 use App\Exceptions\ApiResponseException;
 use App\Http\Resources\v1\CandidateDocument\CandidateDocumentResource;
 use App\Models\Candidate;
@@ -20,12 +21,13 @@ class ShowAction
      * @throws \App\Exceptions\ApiResponseException
      * @return JsonResponse
      */
-    public function __invoke(int $id): JsonResponse
+    public function __invoke(int $id, ShowDto $dto): JsonResponse
     {
+        //dd($id, $dto->candidateId);//
         try {
             $key = 'candidate_documents:show:' . app()->getLocale() . ':' . md5(request()->fullUrl());
-            $doc = Cache::remember($key, now()->addDay(), function () use ($id) {
-                return Candidate::firstOrFail()->documents()->where('id', $id)->firstOrFail();
+            $doc = Cache::remember($key, now()->addDay(), function () use ($id, $dto) {
+                return Candidate::findOrFail($dto->candidateId)->documents()->where('id', $id,)->firstOrFail();
             });
             
             return static::toResponse(

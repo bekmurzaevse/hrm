@@ -5,6 +5,7 @@ namespace App\Http\Resources\v1\CourseMaterial;
 use App\Http\Resources\v1\Course\CourseResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class CourseMaterialResource extends JsonResource
 {
@@ -15,14 +16,17 @@ class CourseMaterialResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $fileExists = Storage::disk('public')->exists($this->path);
+
         return [
             'id' => $this->id,
-            'course' => new CourseResource($this->course),
-            'file_url' => $this->file_url,
+            'name' => $this->name,
+            'path' => $this->path,
             'type' => $this->type,
-            'uploaded_at' => $this->uploaded_at?->format('Y-m-d H:i:s'),
-            'created_at' => $this->created_at->format('Y-m-d H:i:s'),
-            'updated_at' => $this->updated_at->format('Y-m-d H:i:s'),
+            'size' => $fileExists ? round(Storage::disk('public')->size($this->path) / 1024, 2) . " KB" : null,
+            'description' => $this->description,
+            'created_at' => $this->created_at,
+            'download_url' => $fileExists ? url('/api/v1/course-material/download/' . $this->id) : null,
         ];
     }
 }

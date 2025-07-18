@@ -24,7 +24,7 @@ class CandidateDocumentSeeder extends Seeder
         $path = Storage::disk('public')->putFileAs('documents', $file, $fileName);
         
         CandidateDocument::create([
-            'type' => 'passport',
+            'type' => 'candidate_document',
             'file_url' => $path,
             'candidate_id' => Candidate::inRandomOrder()->first()->id,
         ]);

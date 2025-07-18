@@ -2,6 +2,7 @@
 
 namespace App\Actions\v1\CandidateDocument;
 
+use App\Dto\v1\CandidateDocument\DownloadDto;
 use App\Exceptions\ApiResponseException;
 use App\Models\Candidate;
 use App\Traits\ResponseTrait;
@@ -19,10 +20,10 @@ class DownloadAction
      * @throws \App\Exceptions\ApiResponseException
      * @return StreamedResponse
      */
-    public function __invoke(int $id): StreamedResponse
+    public function __invoke(int $id, DownloadDto $dto): StreamedResponse
     {
         try {
-            $document = Candidate::firstOrFail()
+            $document = Candidate::findOrFail($dto->candidateId)
                 ->documents()
                 ->where('id', $id)
                 ->firstOrFail();

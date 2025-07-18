@@ -150,6 +150,7 @@ Route::prefix('course-materials')->group(function () {
     Route::get('/{id}', [CourseMaterialController::class, 'show']);
     Route::post('/create', [CourseMaterialController::class, 'create']);
     Route::put('/update/{id}', [CourseMaterialController::class, 'update']);
+    Route::get('/download/{id}', [CourseMaterialController::class, 'download']);
     Route::delete('/delete/{id}', [CourseMaterialController::class, 'delete']);
 });
 

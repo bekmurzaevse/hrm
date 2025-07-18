@@ -22,6 +22,7 @@ class UpdateRequest extends FormRequest
         return [
             'name' => 'nullable|string',
             'description' => 'nullable|string',
+            'candidate_id' => 'required|integer|exists:candidates,id',
             'file' => 'required|file|mimes:pdf'
         ];
     }
@@ -35,6 +36,9 @@ class UpdateRequest extends FormRequest
             'file.required'         => 'Fayl ma\'jbu\'riy.',
             'file.file'             => 'Fayl bolıwı kerek.',
             'file.mimes'            => 'Fayl formati pdf bolıwı kerek.',
+            'candidate_id.required' => "Candidate ID kiritiw ma'jbu'riy!",
+            'candidate_id.integer'  => "Candidate ID pu'tin san boliwi kerek!",
+            'candidate_id.exists'   => "Bunday candidate ID bazada tabilmadi!",
         ];
     }
 }

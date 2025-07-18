@@ -2,6 +2,7 @@
 
 namespace App\Actions\v1\CandidateDocument;
 
+use App\Dto\v1\CandidateDocument\DeleteDto;
 use App\Exceptions\ApiResponseException;
 use App\Models\Candidate;
 use App\Models\CandidateDocument;
@@ -20,10 +21,10 @@ class DeleteAction
      * @throws \App\Exceptions\ApiResponseException
      * @return JsonResponse
      */
-    public function __invoke(int $id): JsonResponse
+    public function __invoke(int $id, DeleteDto $dto): JsonResponse
     {
         try {
-            $document = Candidate::firstOrFail()
+            $document = Candidate::findOrFail($dto->candidateId)
                 ->documents()
                 ->where('id', $id)
                 ->firstOrFail();

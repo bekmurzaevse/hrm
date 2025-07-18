@@ -2,26 +2,26 @@
 
 namespace App\Actions\v1\CourseMaterial;
 
-use App\Dto\v1\CourseMaterial\DeleteDto;
+use App\Dto\v1\CourseMaterial\DownloadDto;
 use App\Exceptions\ApiResponseException;
 use App\Models\Course;
-use App\Models\CourseMaterial;
 use App\Traits\ResponseTrait;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
-class DeleteAction
+class DownloadAction
 {
     use ResponseTrait;
 
     /**
      * Summary of __invoke
      * @param int $id
+     * @param \App\Dto\v1\CourseMaterial\DownloadDto $dto
      * @throws \App\Exceptions\ApiResponseException
-     * @return JsonResponse
+     * @return StreamedResponse
      */
-    public function __invoke(int $id, DeleteDto $dto): JsonResponse
+    public function __invoke(int $id, DownloadDto $dto): StreamedResponse
     {
         try {
             $material = Course::findOrFail($dto->courseId)
@@ -29,18 +29,13 @@ class DeleteAction
                 ->where('id', $id)
                 ->firstOrFail();
 
-            $filePath = $material->path;    
+            $filePath = $material->path;
 
-            if (Storage::disk('public')->exists($filePath)) {
-                Storage::disk('public')->delete($filePath);
+            if (!Storage::disk('public')->exists($filePath)) {
+                throw new ApiResponseException('Course Material Not Found', 404);
             }
 
-            $material->delete();
-
-            return static::toResponse(
-                message: "$id - id li Course Material o'shirildi",
-            );
-
+            return Storage::disk('public')->download($filePath, $material->name);
         } catch (ModelNotFoundException $ex) {
             throw new ApiResponseException('Course Material Not Found', 404);
         }

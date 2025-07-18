@@ -2,9 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\Course;
 use App\Models\CourseMaterial;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class CourseMaterialSeeder extends Seeder
 {
@@ -13,25 +16,16 @@ class CourseMaterialSeeder extends Seeder
      */
     public function run(): void
     {
+        $file = UploadedFile::fake()->create('passport.pdf', 1024, 'application/pdf');
+        $originalFilename = $file->getClientOriginalName();
+        $fileName = pathinfo($originalFilename, PATHINFO_FILENAME);
+        $fileName = $fileName . '_' . Str::random(10) . '_' . now()->format('Y-m-d-H:i:s') . '.' . $file->extension();
+        $path = Storage::disk('public')->putFileAs('materials', $file, $fileName);
+        
         CourseMaterial::create([
-            'course_id' => 1,
-            'file_url' => 'materials/laravel-intro.pdf',
-            'type' => 'pdf',
-            'uploaded_at' => now(),
-        ]);
-
-        CourseMaterial::create([
-            'course_id' => 1,
-            'file_url' => 'materials/lesson1-video.mp4',
-            'type' => 'video',
-            'uploaded_at' => now()->subDays(2),
-        ]);
-
-        CourseMaterial::create([
-            'course_id' => 2,
-            'file_url' => 'materials/docker-guide.docx',
-            'type' => 'docx',
-            'uploaded_at' => now()->subDays(5),
+            'type' => 'course_material',
+            'file_url' => $path,
+            'course_id' => Course::inRandomOrder()->first()->id,
         ]);
     }
 }

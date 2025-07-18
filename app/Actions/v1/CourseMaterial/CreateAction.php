@@ -3,10 +3,10 @@
 namespace App\Actions\v1\CourseMaterial;
 
 use App\Dto\v1\CourseMaterial\CreateDto;
-use App\Models\CourseMaterial;
+use App\Helpers\FileUploadHelper;
+use App\Models\Course;
 use App\Traits\ResponseTrait;
 use Illuminate\Http\JsonResponse;
-use function Symfony\Component\Clock\now;
 
 class CreateAction
 {
@@ -19,17 +19,19 @@ class CreateAction
      */
     public function __invoke(CreateDto $dto): JsonResponse
     {
-        $data = [
-            'course_id' => $dto->courseId,
-            'file_url' => $dto->fileUrl,
-            'type' => $dto->type,
-            'uploaded_at' => now(),
-        ];
+        $file = $dto->file;
+        $path = FileUploadHelper::file($file, 'course_material');
 
-        CourseMaterial::create($data);
+        Course::findOrFail($dto->courseId)->materials()->create([
+            'name' => $dto->name,
+            'path' => $path,
+            'type' => 'course_material',
+            'size' => $file->getSize(),
+            'description' => $dto->description ?? null,
+        ]);
 
         return static::toResponse(
-            message: 'Kurs materiali jaratildi.',
+            message: 'Course Material Created'
         );
     }
 }

@@ -27,7 +27,7 @@ class UpdateAction
     public function __invoke(int $id, UpdateDto $dto): JsonResponse
     {
         try {
-            $doc = Candidate::firstOrFail()->documents()->where('id', $id)->firstOrFail();
+            $doc = Candidate::findOrFail($dto->candidateId)->documents()->where('id', $id)->firstOrFail();
 
             $file = $dto->file;
             $filePath = $doc->path;
@@ -38,7 +38,7 @@ class UpdateAction
 
             $path = FileUploadHelper::file($file, 'candidate_document');
 
-            Candidate::firstOrFail()->documents()->where('id', $id)->update([
+            Candidate::findOrFail($dto->candidateId)->documents()->where('id', $id)->update([
                 'name' => $dto->name,
                 'path' => $path,
                 'type' => 'candidate_document',
