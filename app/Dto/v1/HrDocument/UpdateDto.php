@@ -9,6 +9,7 @@ readonly class UpdateDto
 {
     public function __construct(
         public ?string $name,
+        public int $userId,
         public ?string $description,
         public ?UploadedFile $file
     ) {
@@ -23,6 +24,7 @@ readonly class UpdateDto
     {
         return new self(
             name: $request->get('name'),
+            userId: $request->get('user_id'),
             description: $request->get('description'),
             file: $request->file('file')
         );

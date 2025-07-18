@@ -22,7 +22,7 @@ class CreateAction
         $file = $dto->file;
         $path = FileUploadHelper::file($file, 'hr_documents');
 
-        User::firstOrFail()->hrDocuments()->create([
+        User::findOrFail($dto->userId)->hrDocuments()->create([
             'name' => $dto->name,
             'path' => $path,
             'type' => 'hr_document',

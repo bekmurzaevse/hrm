@@ -23,6 +23,7 @@ class CreateRequest extends FormRequest
     {
         return [
             'name' => 'nullable|string',
+            'user_id' => 'required|integer|exists:users,id',
             'description' => 'nullable|string',
             'file' => 'required|file|mimes:pdf'
         ];
@@ -30,7 +31,7 @@ class CreateRequest extends FormRequest
 
     /**
      * Summary of messages
-     * @return array{description.required: string, file.file: string, file.mimes: string, file.required: string, name.required: string}
+     * @return array{file.file: string, file.mimes: string, file.required: string, user_id.exists: string, user_id.integer: string, user_id.required: string}
      */
     public function messages(): array
     {
@@ -38,6 +39,9 @@ class CreateRequest extends FormRequest
             'file.required' => 'Fayl ma\'jbu\'riy.',
             'file.file' => 'Fayl bolıwı kerek.',
             'file.mimes' => 'Fayl formati pdf bolıwı kerek.',
+            'user_id.required' => "User id kiritiw ma'jbu'riy!",
+            'user_id.integer' => "User id pu'tin san boliwi kerek!",
+            'user_id.exists' => "Bunday user id bazada tabilmadi!",
         ];
     }
 }

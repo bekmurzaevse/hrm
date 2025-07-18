@@ -39,6 +39,7 @@ class DatabaseSeeder extends Seeder
             TelegramLogSeeder::class,
             KpiRecordSeeder::class,
             FinanceSeeder::class,
+            TagSeeder::class,
         ]);
     }
 }

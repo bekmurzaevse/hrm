@@ -2,6 +2,7 @@
 
 namespace App\Actions\v1\HrOrder;
 
+use App\Dto\v1\HrOrder\IndexDto;
 use App\Http\Resources\v1\HrOrder\HrOrderCollection;
 use App\Models\User;
 use App\Traits\ResponseTrait;
@@ -14,13 +15,14 @@ class IndexAction
 
     /**
      * Summary of __invoke
+     * @param \App\Dto\v1\HrOrder\IndexDto $dto
      * @return JsonResponse
      */
-    public function __invoke(): JsonResponse
+    public function __invoke(IndexDto $dto): JsonResponse
     {
         $key = 'hr_orders:' . app()->getLocale() . ':' . md5(request()->fullUrl());
-        $hrOrders = Cache::remember($key, now()->addDay(), function () {
-            return User::firstOrFail()->hrOrders()->paginate(10);
+        $hrOrders = Cache::remember($key, now()->addDay(), function () use ($dto) {
+            return User::findOrFail($dto->userId)->hrOrders()->paginate(10);
         });
 
         return static::toResponse(
