@@ -2,6 +2,7 @@
 
 namespace App\Actions\v1\HrOrder;
 
+use App\Dto\v1\HrOrder\DeleteDto;
 use App\Exceptions\ApiResponseException;
 use App\Models\User;
 use App\Traits\ResponseTrait;
@@ -16,13 +17,14 @@ class DeleteAction
     /**
      * Summary of __invoke
      * @param int $id
+     * @param \App\Dto\v1\HrOrder\DeleteDto $dto
      * @throws \App\Exceptions\ApiResponseException
      * @return JsonResponse
      */
-    public function __invoke(int $id): JsonResponse
+    public function __invoke(int $id, DeleteDto $dto): JsonResponse
     {
         try {
-            $hrOrder = User::firstOrFail()
+            $hrOrder = User::findOrFail($dto->userId)
                 ->hrOrders()
                 ->where('id', $id)
                 ->firstOrFail();

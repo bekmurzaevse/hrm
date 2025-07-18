@@ -5,7 +5,6 @@ namespace App\Actions\v1\HrDocument;
 use App\Dto\v1\HrDocument\UpdateDto;
 use App\Exceptions\ApiResponseException;
 use App\Helpers\FileUploadHelper;
-use App\Http\Resources\v1\HrDocument\HrDocumentResource;
 use App\Models\User;
 use App\Traits\ResponseTrait;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -26,7 +25,7 @@ class UpdateAction
     public function __invoke(int $id, UpdateDto $dto): JsonResponse
     {
         try {
-            $hrDocument = User::firstOrFail()->hrDocuments()->where('id', $id)->firstOrFail();
+            $hrDocument = User::findOrFail($dto->userId)->hrDocuments()->where('id', $id)->firstOrFail();
 
             $file = $dto->file;
             $filePath = $hrDocument->path;
@@ -37,7 +36,7 @@ class UpdateAction
 
             $path = FileUploadHelper::file($file, 'hr_documents');
 
-            User::firstOrFail()->hrDocuments()->where('id', $id)->update([
+            User::findOrFail($dto->userId)->hrDocuments()->where('id', $id)->update([
                     'name' => $dto->name,
                     'path' => $path,
                     'type' => 'hr_document',
