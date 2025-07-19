@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -31,6 +32,17 @@ class Client extends Model
     }
 
     /**
+     * Summary of booted
+     * @return void
+     */
+    protected static function booted()
+    {
+        static::deleting(function ($client) {
+            $client->tags()->detach(); 
+        });
+    }
+
+    /**
      * Summary of interactions
      * @return HasMany<Interaction, Client>
      */
@@ -55,6 +67,15 @@ class Client extends Model
     public function createdBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'created_by');
+    }
+
+    /**
+     * Summary of tags
+     * @return BelongsToMany<Tag, Client, \Illuminate\Database\Eloquent\Relations\Pivot>
+     */
+    public function tags(): BelongsToMany
+    {
+        return $this->belongsToMany(Tag::class);
     }
 
 }

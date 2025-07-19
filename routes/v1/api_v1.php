@@ -20,6 +20,7 @@ use App\Http\Controllers\v1\RecruitmentFunnelStageController;
 use App\Http\Controllers\v1\TestController;
 use App\Http\Controllers\v1\TestResultController;
 use App\Http\Controllers\v1\ReportController;
+use App\Http\Controllers\v1\TagController;
 use App\Http\Controllers\v1\TaskController;
 use App\Http\Controllers\v1\UserController;
 use App\Http\Controllers\v1\VacancyController;
@@ -226,4 +227,12 @@ Route::prefix('finances')->group(function () {
     Route::post('/create', [FinanceController::class, 'create']);
     Route::put('/update/{id}', [FinanceController::class, 'update']);
     Route::delete('/delete/{id}', [FinanceController::class, 'delete']);
+});
+
+Route::prefix('tags')->group(function () {
+    Route::get('/', [TagController::class, 'index']);
+    Route::get('/{id}', [TagController::class, 'show']);
+    Route::post('/create', [TagController::class, 'create']);
+    Route::put('/update/{id}', [TagController::class, 'update']);
+    Route::delete('/delete/{id}', [TagController::class, 'delete']);
 });

@@ -26,6 +26,8 @@ class UpdateRequest extends FormRequest
             'contact_info' => 'required|string',
             'status' => 'nullable|string',
             'created_by' => 'required|exists:users,id',
+            'tags' => 'nullable|array',
+            'tags.*' => 'required|integer|exists:tags,id',
         ];
     }
 

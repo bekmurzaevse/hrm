@@ -11,6 +11,7 @@ readonly class CreateDto
         public string $contactInfo,
         public ?string $status,
         public int $createdBy,
+        public ?array $tags,
     ) {
     }
 
@@ -25,7 +26,8 @@ readonly class CreateDto
             name: $request->name,
             contactInfo: $request->contact_info,
             status: $request->status,
-            createdBy: $request->created_by
+            createdBy: $request->created_by,
+            tags: $request->tags
         );
     }
 }

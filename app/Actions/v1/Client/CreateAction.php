@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Actions\v1\Client;
 
@@ -10,7 +10,7 @@ use Illuminate\Http\JsonResponse;
 class CreateAction
 {
     use ResponseTrait;
-    
+
     /**
      * Summary of __invoke
      * @param \App\Dto\v1\Client\CreateDto $dto
@@ -25,7 +25,15 @@ class CreateAction
             'created_by' => $dto->createdBy,
         ];
 
-        Client::create($data);
+        $client = Client::create($data);
+
+        if($dto->tags){
+            $tags = collect($dto->tags)->unique()->values()->all();
+
+            $client->tags()->attach(
+                $tags
+            );
+        }
 
         return static::toResponse(
             message: 'Client created'

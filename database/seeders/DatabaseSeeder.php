@@ -40,6 +40,7 @@ class DatabaseSeeder extends Seeder
             KpiRecordSeeder::class,
             FinanceSeeder::class,
             TagSeeder::class,
+            ClientTagSeeder::class,
         ]);
     }
 }
