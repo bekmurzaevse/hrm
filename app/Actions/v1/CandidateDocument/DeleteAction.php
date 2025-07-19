@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Actions\v1\CourseMaterial;
+namespace App\Actions\v1\CandidateDocument;
 
-use App\Dto\v1\CourseMaterial\DeleteDto;
+use App\Dto\v1\CandidateDocument\DeleteDto;
 use App\Exceptions\ApiResponseException;
-use App\Models\Course;
-use App\Models\CourseMaterial;
+use App\Models\Candidate;
+use App\Models\CandidateDocument;
 use App\Traits\ResponseTrait;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
@@ -24,25 +24,25 @@ class DeleteAction
     public function __invoke(int $id, DeleteDto $dto): JsonResponse
     {
         try {
-            $material = Course::findOrFail($dto->courseId)
-                ->materials()
+            $document = Candidate::findOrFail($dto->candidateId)
+                ->documents()
                 ->where('id', $id)
                 ->firstOrFail();
 
-            $filePath = $material->path;    
+            $filePath = $document->path;    
 
             if (Storage::disk('public')->exists($filePath)) {
                 Storage::disk('public')->delete($filePath);
             }
 
-            $material->delete();
+            $document->delete();
 
             return static::toResponse(
-                message: "$id - id li Course Material o'shirildi",
+                message: 'Candidate Document Deleted'
             );
 
         } catch (ModelNotFoundException $ex) {
-            throw new ApiResponseException('Course Material Not Found', 404);
+            throw new ApiResponseException('Document Not Found', 404);
         }
     }
 }

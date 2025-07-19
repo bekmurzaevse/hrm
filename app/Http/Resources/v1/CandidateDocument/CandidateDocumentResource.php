@@ -1,17 +1,18 @@
 <?php
 
-namespace App\Http\Resources\v1\CourseMaterial;
+namespace App\Http\Resources\v1\CandidateDocument;
 
-use App\Http\Resources\v1\Course\CourseResource;
+use App\Http\Resources\v1\Candidate\CandidateResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;
 
-class CourseMaterialResource extends JsonResource
+class CandidateDocumentResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return array<string, mixed>
      */
     public function toArray(Request $request): array
@@ -26,7 +27,7 @@ class CourseMaterialResource extends JsonResource
             'size' => $fileExists ? round(Storage::disk('public')->size($this->path) / 1024, 2) . " KB" : null,
             'description' => $this->description,
             'created_at' => $this->created_at,
-            'download_url' => $fileExists ? url('/api/v1/course-material/download/' . $this->id) : null,
+            'download_url' => $fileExists ? url('/api/v1/candidate-document/download/' . $this->id) : null,
         ];
     }
 }

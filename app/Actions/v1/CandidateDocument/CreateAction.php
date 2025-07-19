@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Actions\v1\CourseMaterial;
+namespace App\Actions\v1\CandidateDocument;
 
-use App\Dto\v1\CourseMaterial\CreateDto;
+use App\Dto\v1\CandidateDocument\CreateDto;
 use App\Helpers\FileUploadHelper;
-use App\Models\Course;
+use App\Models\Candidate;
+use App\Models\CandidateDocument;
 use App\Traits\ResponseTrait;
 use Illuminate\Http\JsonResponse;
 
@@ -14,24 +15,24 @@ class CreateAction
 
     /**
      * Summary of __invoke
-     * @param \App\Dto\v1\CourseMaterial\CreateDto $dto
-     * @return \Illuminate\Http\JsonResponse
+     * @param \App\Dto\v1\CandidateDocument\CreateDto $dto
+     * @return JsonResponse
      */
     public function __invoke(CreateDto $dto): JsonResponse
     {
         $file = $dto->file;
-        $path = FileUploadHelper::file($file, 'course_material');
+        $path = FileUploadHelper::file($file, 'candidate_document');
 
-        Course::findOrFail($dto->courseId)->materials()->create([
+        Candidate::findOrFail($dto->candidateId)->documents()->create([
             'name' => $dto->name,
             'path' => $path,
-            'type' => 'course_material',
+            'type' => 'candidate_document',
             'size' => $file->getSize(),
             'description' => $dto->description ?? null,
         ]);
 
         return static::toResponse(
-            message: 'Course Material Created'
+            message: 'Candidate Document Created'
         );
     }
 }

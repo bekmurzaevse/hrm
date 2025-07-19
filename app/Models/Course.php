@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Course extends Model
@@ -34,9 +35,9 @@ class Course extends Model
         return $this->hasMany(CourseAssignment::class);
     }
 
-    public function materials()
+    public function materials(): MorphMany
     {
-        return $this->hasMany(CourseMaterial::class);
+        return $this->morphMany(File::class, 'fileable')->where('type', 'course_material');
     }
 
     public function tests()
