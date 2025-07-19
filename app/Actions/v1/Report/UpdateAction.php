@@ -26,21 +26,30 @@ class UpdateAction
     public function __invoke(int $id, UpdateDto $dto): JsonResponse
     {
         try {
-            $data = Report::findOrFail($id);
+            $data = Report::with('file')->findOrFail($id);
 
-            if (Storage::disk('public')->exists($data->file_path)) {
-                Storage::disk('public')->delete($data->file_path);
+            if (Storage::disk('public')->exists($data->file->path)) {
+                Storage::disk('public')->delete($data->file->path);
+                $data->file()->delete();
             }
-
-            $file = $dto->file;
-            $savedPath = FileUploadHelper::file($file, 'reports');
 
             $data->update([
                 'title' => $dto->title,
                 'type' => $dto->type,
                 'generated_by' => $dto->generatedBy,
-                'file_path' => $savedPath
             ]);
+
+            $file = $dto->file;
+            $savedPath = FileUploadHelper::file($file, 'reports/' . $id);
+
+            $data->file()->create([
+                'name' => $file->getClientOriginalName(),
+                'path' => $savedPath,
+                'type' => $file->getClientMimeType(),
+                'size' => $file->getSize(),
+                'description' => $dto->description,
+            ]);
+            $data->load('file');
 
             return static::toResponse(
                 message: 'Report Updated',

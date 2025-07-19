@@ -24,10 +24,10 @@ class DeleteAction
         try {
             $data = Report::findOrFail($id);
 
-            if (Storage::disk('public')->exists($data->file_path)) {
-                Storage::disk('public')->delete($data->file_path);
+            if (Storage::disk('public')->exists($data->file->path)) {
+                Storage::disk('public')->delete($data->file->path);
             }
-
+            $data->file()->delete();
             $data->delete();
 
             return static::toResponse(

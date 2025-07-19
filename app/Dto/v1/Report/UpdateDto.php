@@ -12,6 +12,7 @@ readonly class UpdateDto
         public string $type,
         public int $generatedBy,
         public UploadedFile $file,
+        public string $description,
     ) {
     }
 
@@ -26,7 +27,8 @@ readonly class UpdateDto
             title: $request->get('title'),
             type: $request->get('type'),
             generatedBy: $request->get('generated_by'),
-            file: $request->file('file')
+            file: $request->file('file'),
+            description: $request->get('description')
         );
     }
 }

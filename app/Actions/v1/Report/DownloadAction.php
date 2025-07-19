@@ -18,7 +18,7 @@ class DownloadAction
     {
         try {
             $report = Report::findOrFail($id);
-            $filePath = $report->file_path;
+            $filePath = $report->file->path;
 
             if (!Storage::disk('public')->exists($filePath)) {
                 throw new ApiResponseException('Document Not Found', 404);

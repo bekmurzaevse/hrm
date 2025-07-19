@@ -20,7 +20,7 @@ class IndexAction
     {
         $key = 'reports:' . app()->getLocale() . ':' . md5(request()->fullUrl());
         $data = Cache::remember($key, now()->addDay(), function () {
-            return Report::with(['generatedBy'])->paginate(10);
+            return Report::with(['generatedBy', 'file'])->paginate(10);
         });
 
         return static::toResponse(

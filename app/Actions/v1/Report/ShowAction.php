@@ -25,7 +25,7 @@ class ShowAction
         try {
             $key = 'reports:show:' . app()->getLocale() . ':' . md5(request()->fullUrl());
             $data = Cache::remember($key, now()->addDay(), function () use ($id) {
-                return Report::with(['generatedBy'])->findOrFail($id);
+                return Report::with(['generatedBy', 'file'])->findOrFail($id);
             });
 
             return static::toResponse(

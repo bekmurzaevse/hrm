@@ -16,7 +16,7 @@ class ReportResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $fileExists = Storage::disk('public')->exists($this->file_path);
+        $fileExists = Storage::disk('public')->exists($this->file->path);
 
         return [
             'id' => $this->id,
