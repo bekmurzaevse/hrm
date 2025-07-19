@@ -14,9 +14,10 @@ class CreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'course_id' => 'required|exists:courses,id',
-            'file_url' => 'required|url|max:255',
-            'type' => 'required|string|in:pdf,video,image,document',
+            'name' => 'nullable|string',
+            'description' => 'nullable|string',
+            'course_id' => 'required|integer|exists:courses,id',
+            'file' => 'required|file|mimes:pdf'
         ];
     }
 
@@ -24,13 +25,11 @@ class CreateRequest extends FormRequest
     {
         return [
             'course_id.required' => "Kurs ID ma'jbu'riy!",
-            'course_id.exists' => "Bunday kurs ID bazada tabilmadi!",
-            'file_url.required' => "Fayl URL ma'jbu'riy!",
-            'file_url.url' => "Fayl URL duris formatta boliw kerek!",
-            'file_url.max' => "Fayl URL 255 belgiden ko'p bolmawi kerek!",
-            'type.required' => "Fayl tu'ri ma'jbu'riy!",
-            'type.string' => "Fayl tu'ri tekst boliw kerek!",
-            'type.in' => "Fayl tu'ri tek pdf, video, image, document boliwi mu'mkin.",
+            'course_id.integer'  => "Kurs ID pu'tin san boliw kerek!",
+            'course_id.exists'   => "Bunday kurs ID bazada tabilmadi!",
+            'file.required'      => 'Fayl ma\'jbu\'riy.',
+            'file.file'          => 'Fayl bolıwı kerek.',
+            'file.mimes'         => 'Fayl formati pdf bolıwı kerek.',
         ];
     }
 }

@@ -26,12 +26,13 @@ class UpdateRequest extends FormRequest
             'type' => 'required|string|max:255',
             'generated_by' => 'required|integer',
             'file' => 'required|file|mimes:pdf,doc,docx,excel|max:5120',
+            'description' => 'nullable|string|max:1000',
         ];
     }
 
     /**
      * Summary of messages
-     * @return array{file.file: string, file.max: string, file.mimes: string, file.required: string, generated_by.integer: string, generated_by.required: string, title.required: string, title.string: string, type.integer: string, type.required: string}
+     * @return array{description.max: string, description.required: string, description.string: string, file.file: string, file.max: string, file.mimes: string, file.required: string, generated_by.integer: string, generated_by.required: string, title.required: string, title.string: string, type.integer: string, type.required: string}
      */
     public function messages(): array
     {
@@ -46,6 +47,9 @@ class UpdateRequest extends FormRequest
             'file.file' => "file boliwi kerak",
             'file.mimes' => "file tek pdf, doc, docx, excel formatlarda boliwi kerak",
             'file.max' => "file ko'lemi 5MB dan aspawi kerak",
+            'description.required' => "description ma'jburiy",
+            'description.string' => "description string boliwi kerak",
+            'description.max' => "description ko'lemi 1000 belgidan aspawi kerak",
         ];
     }
 }

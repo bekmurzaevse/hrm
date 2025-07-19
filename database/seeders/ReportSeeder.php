@@ -14,11 +14,20 @@ class ReportSeeder extends Seeder
      */
     public function run(): void
     {
-        Report::create([
+        $item = Report::create([
             'title' => 'Monthly Recruitment Report',
             'type' => 'monthly',
             'generated_by' => User::inRandomOrder()->first()->id,
-            'file_path' => 'reports/report.pdf',
+        ]);
+
+        $item->file()->create([
+            'name' => 'report.pdf',
+            'path' => 'reports/report.pdf',
+            'type' => 'application/pdf',
+            'size' => 204800,
+            'fileable_type' => Report::class,
+            'fileable_id' => $item->id,
+            'description' => 'Monthly recruitment report for the month of July.',
         ]);
     }
 }

@@ -3,23 +3,25 @@
 namespace App\Dto\v1\CourseMaterial;
 
 use App\Http\Requests\v1\CourseMaterial\CreateRequest;
+use Illuminate\Http\UploadedFile;
 
 
 readonly class CreateDto
 {
     public function __construct(
+        public ?string $name,
+        public ?string $description,
         public int $courseId,
-        public string $fileUrl,
-        public string $type,
-    ) {
-    }
+        public UploadedFile $file
+    ) {}
 
     public static function from(CreateRequest $request): self
     {
         return new self(
-            courseId: $request->course_id,
-            fileUrl: $request->file_url,
-            type: $request->type,
+            name: $request->get('name'),
+            description: $request->get('description'),
+            courseId: $request->get('course_id'),
+            file: $request->file('file')
         );
     }
 }

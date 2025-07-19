@@ -2,9 +2,13 @@
 
 namespace Database\Seeders;
 
+use App\Models\Candidate;
 use App\Models\CandidateDocument;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class CandidateDocumentSeeder extends Seeder
 {
@@ -13,25 +17,16 @@ class CandidateDocumentSeeder extends Seeder
      */
     public function run(): void
     {
+        $file = UploadedFile::fake()->create('passport.pdf', 1024, 'application/pdf');
+        $originalFilename = $file->getClientOriginalName();
+        $fileName = pathinfo($originalFilename, PATHINFO_FILENAME);
+        $fileName = $fileName . '_' . Str::random(10) . '_' . now()->format('Y-m-d-H:i:s') . '.' . $file->extension();
+        $path = Storage::disk('public')->putFileAs('documents', $file, $fileName);
+        
         CandidateDocument::create([
-            'candidate_id' => 1,
-            'type' => 'CV',
-            'file_url' => 'documents/aybek_cv.pdf',
-            'uploaded_at' => now()->subDays(3),
-        ]);
-
-        CandidateDocument::create([
-            'candidate_id' => 2,
-            'type' => 'Diploma',
-            'file_url' => 'documents/zina.jpg',
-            'uploaded_at' => now()->subDays(2),
-        ]);
-
-        CandidateDocument::create([
-            'candidate_id' => 3,
-            'type' => 'Portfolio',
-            'file_url' => 'documents/begis_portfolio.zip',
-            'uploaded_at' => now()->subDay(),
+            'type' => 'candidate_document',
+            'file_url' => $path,
+            'candidate_id' => Candidate::inRandomOrder()->first()->id,
         ]);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\v1\CourseAssignment;
 
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class CourseAssignmentCollection extends ResourceCollection
@@ -12,7 +13,7 @@ class CourseAssignmentCollection extends ResourceCollection
      * @param  \Illuminate\Http\Request  $request
      * @return array<string, mixed>
      */
-    public function toArray($request): array
+    public function toArray(Request $request): array
     {
         return [
             'items' => $this->collection,

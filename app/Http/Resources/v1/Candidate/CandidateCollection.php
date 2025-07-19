@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\v1\Candidate;
 
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class CandidateCollection extends ResourceCollection
@@ -11,7 +12,7 @@ class CandidateCollection extends ResourceCollection
      *
      * @return array<int|string, mixed>
      */
-    public function toArray($request): array
+    public function toArray(Request $request): array
     {
         return [
             'items' => $this->collection,
