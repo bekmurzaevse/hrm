@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Actions\v1\Client;
 
@@ -13,7 +13,7 @@ use Illuminate\Http\JsonResponse;
 class UpdateAction
 {
     use ResponseTrait;
-    
+
     /**
      * Summary of __invoke
      * @param int $id
@@ -31,6 +31,12 @@ class UpdateAction
                 'status' => $dto->status ?? $client->status,
                 'created_by' => $dto->createdBy,
             ]);
+
+            if($dto->tags){
+                $tags = collect($dto->tags)->unique()->values()->all();
+
+                $client->tags()->sync($tags);
+            }
 
             return static::toResponse(
                 message: 'Client Updated',
