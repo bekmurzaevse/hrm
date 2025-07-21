@@ -18,16 +18,14 @@ class InteractionSeeder extends Seeder
             'client_id' => Client::inRandomOrder()->first()->id,
             'type' => 'phone',
             'notes' => '',
-            // 'date' => now(),
             'user_id' => 1,
             'description' => 'Description',
         ]);
-        
+
         Interaction::create([
             'client_id' => Client::inRandomOrder()->first()->id,
             'type' => 'telegram',
             'notes' => '',
-            // 'date' => now(),
             'user_id' => 1,
             'description' => 'Description',
         ]);

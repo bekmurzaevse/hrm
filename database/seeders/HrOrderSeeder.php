@@ -2,13 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\HrOrder;
+use App\Helpers\FileUploadHelper;
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 class HrOrderSeeder extends Seeder
 {
@@ -17,16 +14,19 @@ class HrOrderSeeder extends Seeder
      */
     public function run(): void
     {
-        $file = UploadedFile::fake()->create('order.pdf', 1024, 'application/pdf');
-        $originalFilename = $file->getClientOriginalName();
-        $fileName = pathinfo($originalFilename, PATHINFO_FILENAME);
-        $fileName = $fileName . '_' . Str::random(10) . '_' . now()->format('Y-m-d-H:i:s') . '.' . $file->extension();
-        $path = Storage::disk('public')->putFileAs('documents', $file, $fileName);
-        
-        HrOrder::create([
-            'order_type' => 'order',
-            'document_url' => $path,
-            'user_id' => User::inRandomOrder()->first()->id,
+        $file = UploadedFile::fake()->create('Metrika.pdf', 1024, 'application/pdf');
+
+        $path = FileUploadHelper::file($file, 'hr_orders');
+
+        $user = User::first();
+
+        $user->hrOrders()->create([
+            'name' => $file->getClientOriginalName(),
+            'path' => $path,
+            'type' => 'hr_order',
+            'size' => $file->getSize(),
+            'description' => $dto->description ?? null,
         ]);
+
     }
 }

@@ -38,7 +38,7 @@ class DeleteAction
             $hrOrder->delete();
 
             return static::toResponse(
-                message: 'Hr Document Deleted',
+                message: 'Hr Order Deleted',
             );
         } catch (ModelNotFoundException $ex) {
             throw new ApiResponseException('Hr Order Not Found', 404);

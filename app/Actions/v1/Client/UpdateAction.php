@@ -27,7 +27,7 @@ class UpdateAction
             $client = Client::with(['createdBy'])->findOrFail($id);
             $client->update([
                 'name' => $dto->name,
-                'contact_infp' => $dto->contactInfo,
+                'contact_info' => $dto->contactInfo,
                 'status' => $dto->status ?? $client->status,
                 'created_by' => $dto->createdBy,
             ]);
