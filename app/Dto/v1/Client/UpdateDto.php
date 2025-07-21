@@ -9,7 +9,7 @@ readonly class UpdateDto
     public function __construct(
         public string $name,
         public string $contactInfo,
-        public string $status,
+        public ?string $status,
         public int $createdBy,
         public ?array $tags,
     ) {

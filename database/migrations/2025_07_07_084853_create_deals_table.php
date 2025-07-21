@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('deals', function (Blueprint $table) {
             $table->id();
             $table->foreignId('client_id')->constrained()->restrictOnDelete()->cascadeOnUpdate();
-            $table->enum('stage', ['lead', 'negotiation', 'contract', 'completed'])->default('lead');
+            $table->enum('stage', ['lead', 'negotiation', 'contract', 'completed'])->default('lead')->nullable();
             $table->integer('value');
             $table->string('description')->nullable();
             $table->timestamps();

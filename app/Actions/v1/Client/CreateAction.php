@@ -21,7 +21,7 @@ class CreateAction
         $data = [
             'name' => $dto->name,
             'contact_info' => $dto->contactInfo,
-            'status' => $dto->status,
+            'status' => $dto->status ?? 'active',
             'created_by' => $dto->createdBy,
         ];
 

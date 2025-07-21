@@ -2,13 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\HrDocument;
+use App\Helpers\FileUploadHelper;
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 class HrDocumentSeeder extends Seeder
 {
@@ -18,15 +15,17 @@ class HrDocumentSeeder extends Seeder
     public function run(): void
     {
         $file = UploadedFile::fake()->create('passport.pdf', 1024, 'application/pdf');
-        $originalFilename = $file->getClientOriginalName();
-        $fileName = pathinfo($originalFilename, PATHINFO_FILENAME);
-        $fileName = $fileName . '_' . Str::random(10) . '_' . now()->format('Y-m-d-H:i:s') . '.' . $file->extension();
-        $path = Storage::disk('public')->putFileAs('documents', $file, $fileName);
-        
-        HrDocument::create([
-            'type' => 'passport',
-            'file_url' => $path,
-            'user_id' => User::inRandomOrder()->first()->id,
+
+        $path = FileUploadHelper::file($file, 'hr_documents');
+
+        $user = User::first();
+
+        $user->hrDocuments()->create([
+            'name' => $file->getClientOriginalName(),
+            'path' => $path,
+            'type' => 'hr_document',
+            'size' => $file->getSize(),
+            'description' => $dto->description ?? null,
         ]);
     }
 }
