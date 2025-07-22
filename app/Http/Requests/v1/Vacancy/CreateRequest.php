@@ -25,7 +25,7 @@ class CreateRequest extends FormRequest
             'title' => 'required|string',
             'requirements' => 'required|string',
             'salary' => 'nullable|numeric',
-            'eadline' => 'nullable|string',
+            'deadline' => 'nullable|string',
             'recruiter_id' => 'required|integer|exists:users,id',
             'project_id' => 'required|integer|exists:projects,id',
             'status' => 'nullable|string|in:open,closed',
