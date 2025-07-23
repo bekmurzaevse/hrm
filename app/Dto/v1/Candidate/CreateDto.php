@@ -3,6 +3,7 @@
 namespace App\Dto\v1\Candidate;
 
 use App\Http\Requests\v1\Candidate\CreateRequest;
+use Illuminate\Http\UploadedFile;
 
 readonly class CreateDto
 {
@@ -13,9 +14,10 @@ readonly class CreateDto
         public ?string $phone,
         public ?string $education,
         public ?string $experience,
-        public ?string $photoUrl,
+        public UploadedFile $photo,
         public string $status,
-    ) {}
+    ) {
+    }
 
     public static function from(CreateRequest $request): self
     {
@@ -26,7 +28,7 @@ readonly class CreateDto
             phone: $request->phone,
             education: $request->education,
             experience: $request->experience,
-            photoUrl: $request->photo_url,
+            photo: $request->photo,
             status: $request->status,
         );
     }
