@@ -62,6 +62,12 @@ class ClientController extends Controller
                     type: "integer",
                     example: 1
                 ),
+                new OA\Property(
+                    property: "tags",
+                    type: "array",
+                    items: new OA\Items(type: "integer"),
+                    example: [1,2]
+                ),
             ]
         )
     )]
@@ -97,6 +103,12 @@ class ClientController extends Controller
                         property: "created_by",
                         type: "integer",
                         example: 1
+                    ),
+                    new OA\Property(
+                        property: "tags",
+                        type: "array",
+                        items: new OA\Items(type: "integer"),
+                        example: [3,4]
                     ),
                 ]
             )

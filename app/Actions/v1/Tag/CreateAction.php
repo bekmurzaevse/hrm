@@ -25,7 +25,7 @@ class CreateAction
         Tag::create($data);
 
         return static::toResponse(
-            message: 'Interaction created'
+            message: 'Tag created'
         );
     }
 }
