@@ -24,7 +24,7 @@ class CreateRequest extends FormRequest
         return [
             'title' => 'required|string|max:255',
             'type' => 'required|string|max:255',
-            'generated_by' => 'required|integer',
+            'generated_by' => 'required|integer|exists:users,id',
             'file' => 'required|file|mimes:pdf,doc,docx,excel|max:5120',
             'description' => 'nullable|string|max:1000',
         ];
@@ -32,7 +32,7 @@ class CreateRequest extends FormRequest
 
     /**
      * Summary of messages
-     * @return array{description.max: string, description.required: string, description.string: string, file.file: string, file.max: string, file.mimes: string, file.required: string, generated_by.integer: string, generated_by.required: string, title.required: string, title.string: string, type.integer: string, type.required: string}
+     * @return array{description.max: string, description.required: string, description.string: string, file.file: string, file.max: string, file.mimes: string, file.required: string, generated_by.exists: string, generated_by.integer: string, generated_by.required: string, title.required: string, title.string: string, type.integer: string, type.required: string}
      */
     public function messages(): array
     {
@@ -43,6 +43,7 @@ class CreateRequest extends FormRequest
             'type.integer' => "type string boliwi kerak",
             'generated_by.required' => "generated_by ma'jburiy",
             'generated_by.integer' => "generated_by integer boliwi kerak",
+            'generated_by.exists' => "generated_by user table id boliwi kerek",
             'file.required' => "file ma'jburiy",
             'file.file' => "file boliwi kerak",
             'file.mimes' => "file tek pdf, doc, docx, excel formatlarda boliwi kerak",
