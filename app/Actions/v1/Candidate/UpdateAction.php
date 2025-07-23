@@ -4,11 +4,13 @@ namespace App\Actions\v1\Candidate;
 
 use App\Dto\v1\Candidate\UpdateDto;
 use App\Exceptions\ApiResponseException;
+use App\Helpers\FileUploadHelper;
 use App\Http\Resources\v1\Candidate\CandidateResource;
 use App\Models\Candidate;
 use App\Traits\ResponseTrait;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Storage;
 
 class UpdateAction
 {
@@ -24,7 +26,7 @@ class UpdateAction
     public function __invoke(int $id, UpdateDto $dto): JsonResponse
     {
         try {
-            $candidate = Candidate::findOrFail($id);
+            $candidate = Candidate::with(['photo'])->findOrFail($id);
             $candidate->update([
                 'first_name'   => $dto->firstName,
                 'last_name'    => $dto->lastName,
@@ -32,8 +34,20 @@ class UpdateAction
                 'phone'        => $dto->phone,
                 'education'    => $dto->education,
                 'experience'   => $dto->experience,
-                'photo_url'    => $dto->photoUrl,
                 'status'       => $dto->status,
+            ]);
+
+            if (Storage::disk('public')->exists($candidate->photo->path)) {
+                Storage::disk('public')->delete($candidate->photo->path);
+            }
+
+            $path = FileUploadHelper::file($dto->photo, 'photo');
+
+            $candidate->photo()->update([
+                'name' => $dto->photo->getClientOriginalName(),
+                'path' => $path,
+                'type' => "photo",
+                'size' => $dto->photo->getSize(),
             ]);
 
             return static::toResponse(

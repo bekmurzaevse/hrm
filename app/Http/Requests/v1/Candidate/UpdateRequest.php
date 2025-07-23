@@ -31,7 +31,7 @@ class UpdateRequest extends FormRequest
             'phone'        => 'nullable|string|max:20',
             'education'    => 'nullable|string',
             'experience'   => 'nullable|string',
-            'photo_url'    => 'nullable|url',
+            'photo'        => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'status'       => 'sometimes|required|string|max:50',
         ];
     }
@@ -61,8 +61,10 @@ class UpdateRequest extends FormRequest
 
             'education.string'    => "Education string boliw kerek.",
             'experience.string'   => "Experience string boliw kerek.",
-            'photo_url.url'       => "Photo URL haqiqiy URL boliw kerek.",
-
+            
+            'photo.required'      => "Photo ma'jbu'riy.",
+            'photo.image'         => "Photo boliw kerek.",
+            'photo.mimes'         => "Photo jpeg, png, jpg formatlarinda boliw kerek.",
             'status.required'     => "Status ma'jbu'riy.",
             'status.string'       => "Status string boliw kerek.",
             'status.max'          => "Status 50 belgiden ko'p bolmawi kerek.",

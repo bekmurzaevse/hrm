@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Candidate extends Model
@@ -18,7 +19,6 @@ class Candidate extends Model
         'phone',
         'education',
         'experience',
-        'photo_url',
         'status',
     ];
 
@@ -39,5 +39,10 @@ class Candidate extends Model
     public function documents(): MorphMany
     {
         return $this->morphMany(File::class, 'fileable')->where('type', 'candidate_document');
+    }
+
+    public function photo(): MorphOne
+    {
+        return $this->morphOne(File::class, 'fileable');
     }
 }

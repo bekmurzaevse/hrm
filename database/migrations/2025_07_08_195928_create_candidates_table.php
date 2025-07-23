@@ -18,7 +18,6 @@ return new class extends Migration {
             $table->string('phone')->nullable();
             $table->text('education')->nullable();
             $table->text('experience')->nullable();
-            $table->string('photo_url')->nullable();
             $table->string('status');
             $table->softDeletes();
             $table->timestamps();

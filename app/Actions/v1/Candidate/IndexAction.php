@@ -20,7 +20,7 @@ class IndexAction
     {
         $key = 'candidates:' . app()->getLocale() . ':' . md5(request()->fullUrl());
         $candidates = Cache::remember($key, now()->addDay(), function () {
-            return Candidate::paginate(10);
+            return Candidate::with(['photo'])->paginate(10);
         });
 
         return static::toResponse(
