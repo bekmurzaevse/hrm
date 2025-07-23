@@ -20,7 +20,7 @@ class ApplicationResource extends JsonResource
         return [
             'id' => $this->id,
             'candidate' => new CandidateResource($this->candidate),
-            'vacancy_id' => new VacancyResource($this->vacancy),
+            'vacancy' => new VacancyResource($this->vacancy),
             'current_stage' => new RecruitmentFunnelStageResource($this->currentStage),
             'applied_at' => $this->applied_at->format('Y-m-d'),
             'created_at' => $this->created_at->format('Y-m-d H:i:s'),

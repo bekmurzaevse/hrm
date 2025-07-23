@@ -34,7 +34,7 @@ class CreateRequest extends FormRequest
     {
         return [
             'vacancy_id' => 'required|integer|exists:vacancies,id',
-            'stage_name' => 'required|string|in: ' . implode(',', $this->enums),
+            'stage_name' => 'required|string|in:' . implode(',', $this->enums),
             'order' => 'required|integer|min:1',
         ];
     }
