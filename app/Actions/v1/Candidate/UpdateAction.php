@@ -46,7 +46,7 @@ class UpdateAction
             $candidate->photo()->update([
                 'name' => $dto->photo->getClientOriginalName(),
                 'path' => $path,
-                'type' => "photo",
+                'type' => "candidate_photo",
                 'size' => $dto->photo->getSize(),
             ]);
 

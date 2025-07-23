@@ -36,7 +36,7 @@ class CreateAction
         $candidate->photo()->create([
             'name' => $photo->getClientOriginalName(),
             'path' => $path,
-            'type' => "photo",
+            'type' => "candidate_photo",
             'size' => $photo->getSize(),
         ]);
 

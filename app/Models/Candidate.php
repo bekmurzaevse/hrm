@@ -43,6 +43,6 @@ class Candidate extends Model
 
     public function photo(): MorphOne
     {
-        return $this->morphOne(File::class, 'fileable');
+        return $this->morphOne(File::class, 'fileable')->where('type', 'candidate_photo');
     }
 }

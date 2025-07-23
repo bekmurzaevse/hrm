@@ -27,12 +27,12 @@ class CandidateSeeder extends Seeder
         ]);
 
         $photo = UploadedFile::fake()->image('aybek.jpg');
-        $path = FileUploadHelper::file($photo, 'photo');
+        $path = FileUploadHelper::file($photo, 'candidate_photo');
 
         $candidate1->photo()->create([
             'name' => $photo->getClientOriginalName(),
             'path' => $path,
-            'type' => "photo",
+            'type' => "candidate_photo",
             'size' => $photo->getSize(),
         ]);
 
@@ -47,12 +47,12 @@ class CandidateSeeder extends Seeder
         ]);
 
         $photo = UploadedFile::fake()->image('zina.jpg');
-        $path = FileUploadHelper::file($photo, 'photo');
+        $path = FileUploadHelper::file($photo, 'candidate_photo');
 
         $candidate2->photo()->create([
             'name' => $photo->getClientOriginalName(),
             'path' => $path,
-            'type' => "photo",
+            'type' => "candidate_photo",
             'size' => $photo->getSize(),
         ]);
 
@@ -67,12 +67,12 @@ class CandidateSeeder extends Seeder
         ]);
 
         $photo = UploadedFile::fake()->image('begis.jpg');
-        $path = FileUploadHelper::file($photo, 'photo');
+        $path = FileUploadHelper::file($photo, 'candidate_photo');
 
         $candidate3->photo()->create([
             'name' => $photo->getClientOriginalName(),
             'path' => $path,
-            'type' => "photo",
+            'type' => "candidate_photo",
             'size' => $photo->getSize(),
         ]);
     }
