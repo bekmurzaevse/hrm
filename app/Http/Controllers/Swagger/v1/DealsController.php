@@ -123,17 +123,15 @@ class DealsController extends Controller
         tags: ["Deals"],
         // security: [["sanctum" => []]],
         parameters: [
-            new OA\Parameter(name: "id", in: "path", required: true, schema: new OA\Schema(type: "integer"))],
-        responses: [
-            new OA\Response(response: 200, description: "Deals o'shirildi"),
-            new OA\Response(response: 401, description: "Not allowed"),
-            new OA\Response(response: 404, description: "Deals tabilmadi"),
-        ]
+            new OA\Parameter(name: "id", in: "path", required: true, schema: new OA\Schema(type: "integer"))
+        ],
     )]
+    #[OA\Response(response: 200, description: 'Deals jaratildi')]
+    #[OA\Response(response: 401, description: 'Not allowed')]
+    #[OA\Response(response: 404, description: "Deals tabilmadi")]
     public function delete()
     {
         //
     }
-
 
 }
