@@ -24,7 +24,7 @@ class UpdateAction
     public function __invoke(int $id, UpdateDto $dto): JsonResponse
     {
         try {
-            $client = Client::with(['createdBy'])->findOrFail($id);
+            $client = Client::with(['createdBy', 'tags'])->findOrFail($id);
             $client->update([
                 'name' => $dto->name,
                 'contact_info' => $dto->contactInfo,

@@ -144,12 +144,10 @@ class InterActionController extends Controller
         // security: [["sanctum" => []]],
         parameters: [
             new OA\Parameter(name: "id", in: "path", required: true, schema: new OA\Schema(type: "integer"))],
-        responses: [
-            new OA\Response(response: 200, description: "Interaction o'shirildi"),
-            new OA\Response(response: 401, description: "Not allowed"),
-            new OA\Response(response: 404, description: "Interaction tabilmadi"),
-        ]
     )]
+    #[OA\Response(response: 200, description: 'Interaction jaratildi')]
+    #[OA\Response(response: 401, description: 'Not allowed')]
+    #[OA\Response(response: 404, description: "Interaction tabilmadi")]
     public function delete()
     {
         //

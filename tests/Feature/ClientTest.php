@@ -38,6 +38,7 @@ class ClientTest extends TestCase
                             "contact_info",
                             "status",
                             "created_by",
+                            "tags",
                             "created_at",
                             "updated_at"
                         ]
@@ -76,6 +77,7 @@ class ClientTest extends TestCase
                     "contact_info",
                     "status",
                     "created_by",
+                    "tags",
                     "created_at",
                     "updated_at"
                 ]
