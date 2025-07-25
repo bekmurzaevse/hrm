@@ -27,5 +27,12 @@ class AppServiceProvider extends ServiceProvider
         \App\Models\User::observe(\App\Observers\UserObserver::class);
         \App\Models\Tag::observe(\App\Observers\TagObserver::class);
         \App\Models\File::observe(\App\Observers\FileObserver::class);
+        \App\Models\Application::observe(\App\Observers\ApplicationObserver::class);
+        \App\Models\FunnelLog::observe(\App\Observers\FunnelLogObserver::class);
+        \App\Models\RecruitmentFunnelStage::observe(\App\Observers\RecruitmentFunnelStageObserver::class);
+        \App\Models\Report::observe(\App\Observers\ReportObserver::class);
+        \App\Models\Finance::observe(\App\Observers\FinanceObserver::class);
+        \App\Models\Task::observe(\App\Observers\TaskObserver::class);
+        \App\Models\KpiRecord::observe(\App\Observers\KpiRecordObserver::class);
     }
 }
