@@ -135,12 +135,10 @@ class ClientController extends Controller
         tags: ["Client"],
         // security: [["sanctum" => []]],
         parameters: [new OA\Parameter(name: "id", in: "path", required: true, schema: new OA\Schema(type: "integer"))],
-        responses: [
-            new OA\Response(response: 200, description: "Client o'shirildi"),
-            new OA\Response(response: 401, description: "Not allowed"),
-            new OA\Response(response: 404, description: "Client tabilmadi"),
-        ]
     )]
+    #[OA\Response(response: 200, description: 'Client jaratildi')]
+    #[OA\Response(response: 401, description: 'Not allowed')]
+    #[OA\Response(response: 404, description: "Client tabilmadi")]
     public function delete()
     {
         //

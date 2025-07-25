@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             UserSeeder::class,
+            TagSeeder::class,
             ClientSeeder::class,
             DealsSeeder::class,
             InteractionSeeder::class,
@@ -39,8 +40,6 @@ class DatabaseSeeder extends Seeder
             TelegramLogSeeder::class,
             KpiRecordSeeder::class,
             FinanceSeeder::class,
-            TagSeeder::class,
-            ClientTagSeeder::class,
         ]);
     }
 }

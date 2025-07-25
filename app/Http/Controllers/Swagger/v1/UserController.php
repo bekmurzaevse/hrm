@@ -142,12 +142,10 @@ class UserController extends Controller
         // security: [["sanctum" => []]],
         parameters: [
             new OA\Parameter(name: "id", in: "path", required: true, schema: new OA\Schema(type: "integer"))],
-        responses: [
-            new OA\Response(response: 200, description: "User o'shirildi"),
-            new OA\Response(response: 401, description: "Not allowed"),
-            new OA\Response(response: 404, description: "User tabilmadi"),
-        ]
     )]
+    #[OA\Response(response: 200, description: 'User jaratildi')]
+    #[OA\Response(response: 401, description: 'Not allowed')]
+    #[OA\Response(response: 404, description: "User tabilmadi")]
     public function delete()
     {
         //

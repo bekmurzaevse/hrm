@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Client;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class ClientSeeder extends Seeder
@@ -13,18 +12,22 @@ class ClientSeeder extends Seeder
      */
     public function run(): void
     {
-        Client::create([
+        $client1 = Client::create([
             'name' => 'Google',
             'contact_info' => '998977654321',
             'status' => 'active',
             'created_by' => 1,
         ]);
-        
-        Client::create([
+
+        $client1->tags()->attach([1,2]);
+
+        $client2 = Client::create([
             'name' => 'Facebook',
             'contact_info' => '998996543217',
             'status' => 'active',
             'created_by' => 1,
         ]);
+
+        $client2->tags()->attach([2,4]);
     }
 }

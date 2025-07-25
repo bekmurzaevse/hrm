@@ -172,12 +172,10 @@ class VacancyController extends Controller
         // security: [["sanctum" => []]],
         parameters: [
             new OA\Parameter(name: "id", in: "path", required: true, schema: new OA\Schema(type: "integer"))],
-        responses: [
-            new OA\Response(response: 200, description: "Vacancy o'shirildi"),
-            new OA\Response(response: 401, description: "Not allowed"),
-            new OA\Response(response: 404, description: "Vacancy tabilmadi"),
-        ]
     )]
+    #[OA\Response(response: 200, description: 'Vacancy jaratildi')]
+    #[OA\Response(response: 401, description: 'Not allowed')]
+    #[OA\Response(response: 404, description: "Vacancy tabilmadi")]
     public function delete()
     {
         //
