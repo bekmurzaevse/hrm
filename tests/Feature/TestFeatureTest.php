@@ -16,6 +16,10 @@ class TestFeatureTest extends TestCase
         $this->seed();
     }
 
+    /**
+     * Summary of test_tests_can_get_all
+     * @return void
+     */
     public function test_tests_can_get_all()
     {
         $response = $this->getJson("/api/v1/tests");
@@ -37,6 +41,10 @@ class TestFeatureTest extends TestCase
             ]);
     }
 
+    /**
+     * Summary of test_tests_can_show
+     * @return void
+     */
     public function test_tests_can_show()
     {
         $testId = Test::inRandomOrder()->first()->id;
@@ -58,6 +66,10 @@ class TestFeatureTest extends TestCase
         ]);
     }
 
+    /**
+     * Summary of test_tests_can_get_questions
+     * @return void
+     */
     public function test_tests_can_create()
     {
         $data = [
@@ -75,6 +87,10 @@ class TestFeatureTest extends TestCase
             ]);
     }
 
+    /**
+     * Summary of test_tests_can_update
+     * @return void
+     */
     public function test_tests_can_update()
     {
         $testId = Test::inRandomOrder()->first()->id;
@@ -93,6 +109,10 @@ class TestFeatureTest extends TestCase
             ]);
     }
 
+    /**
+     * Summary of test_tests_can_delete
+     * @return void
+     */
     public function test_tests_can_delete()
     {
         $testId = Test::inRandomOrder()->first()->id;

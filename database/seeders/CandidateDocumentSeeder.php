@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Helpers\FileUploadHelper;
 use App\Models\Candidate;
 use App\Models\CandidateDocument;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -17,16 +18,18 @@ class CandidateDocumentSeeder extends Seeder
      */
     public function run(): void
     {
-        $file = UploadedFile::fake()->create('passport.pdf', 1024, 'application/pdf');
-        $originalFilename = $file->getClientOriginalName();
-        $fileName = pathinfo($originalFilename, PATHINFO_FILENAME);
-        $fileName = $fileName . '_' . Str::random(10) . '_' . now()->format('Y-m-d-H:i:s') . '.' . $file->extension();
-        $path = Storage::disk('public')->putFileAs('documents', $file, $fileName);
-        
-        CandidateDocument::create([
+        $file = UploadedFile::fake()->create('document.pdf', 1024, 'application/pdf');
+
+        $path = FileUploadHelper::file($file, 'candidate_document');
+
+        $candidate = Candidate::first();
+
+        $candidate->documents()->create([
+            'name' => $file->getClientOriginalName(),
+            'path' => $path,
             'type' => 'candidate_document',
-            'file_url' => $path,
-            'candidate_id' => Candidate::inRandomOrder()->first()->id,
+            'size' => $file->getSize(),
+            'description' => $dto->description ?? null,
         ]);
     }
 }

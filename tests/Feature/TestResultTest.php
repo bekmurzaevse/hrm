@@ -18,6 +18,10 @@ class TestResultTest extends TestCase
         $this->seed();
     }
 
+    /**
+     * Summary of test_test_result_can_get_all
+     * @return void
+     */
     public function test_test_result_can_get_all()
     {
         $response = $this->getJson("/api/v1/test-results");
@@ -39,6 +43,10 @@ class TestResultTest extends TestCase
             ]);
     }
 
+    /**
+     * Summary of test_test_result_can_show
+     * @return void
+     */
     public function test_test_result_can_show()
     {
         $testResultId = TestResult::inRandomOrder()->first()->id;
@@ -54,6 +62,10 @@ class TestResultTest extends TestCase
             ]);
     }
 
+    /**
+     * Summary of test_test_result_can_get_by_user
+     * @return void
+     */
     public function test_test_result_can_created(): void
     {
         $test = Test::inRandomOrder()->first();
@@ -81,6 +93,10 @@ class TestResultTest extends TestCase
         ]);
     }
 
+    /**
+     * Summary of test_test_result_can_get_by_user
+     * @return void
+     */
     public function test_test_result_can_updated(): void
     {
         
@@ -112,6 +128,10 @@ class TestResultTest extends TestCase
         ]);
     }
 
+    /**
+     * Summary of test_test_result_can_deleted
+     * @return void
+     */
     public function test_test_result_can_deleted(): void
     {
         $testResult = TestResult::inRandomOrder()->first();

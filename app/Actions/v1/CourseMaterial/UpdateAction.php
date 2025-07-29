@@ -24,26 +24,6 @@ class UpdateAction
      * @throws \App\Exceptions\ApiResponseException
      * @return JsonResponse
      */
-    // public function __invoke(int $id, UpdateDto $dto): JsonResponse
-    // {
-    //     try {
-    //         $material = CourseMaterial::with('course')->findOrFail($id);
-
-    //         $material->update([
-    //             'course_id' => $dto->courseId,
-    //             'file_url' => $dto->fileUrl ?? $material->fileUrl,
-    //             'type' => $dto->type ?? $material->type,
-    //             'uploaded_at' => now(),
-    //         ]);
-
-    //         return static::toResponse(
-    //             message: "$id - id li course material jan'alandi",
-    //             data: new CourseMaterialResource($material)
-    //         );
-    //     } catch (ModelNotFoundException $ex) {
-    //         throw new ApiResponseException('CourseMaterial Not Found', 404);
-    //     }
-    // }
     public function __invoke(int $id, UpdateDto $dto): JsonResponse
     {
         try {
