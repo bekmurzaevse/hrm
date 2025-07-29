@@ -16,6 +16,10 @@ class CourseTest extends TestCase
         $this->seed();
     }
 
+    /**
+     * Summary of test_course_can_get_all
+     * @return void
+     */
     public function test_course_can_get_all(): void
     {
         $response = $this->getJson('api/v1/courses');
@@ -37,6 +41,10 @@ class CourseTest extends TestCase
             ]);
     }
 
+    /**
+     * Summary of test_course_can_show
+     * @return void
+     */
     public function test_course_can_show(): void
     {
         $course = Course::inRandomOrder()->first();
@@ -52,6 +60,10 @@ class CourseTest extends TestCase
             ]);
     }
 
+    /**
+     * Summary of test_course_can_get_by_slug
+     * @return void
+     */
     public function test_course_can_create(): void
     {
         //$user = User::find(1)->first();
@@ -79,6 +91,10 @@ class CourseTest extends TestCase
 
     }
 
+    /**
+     * Summary of test_course_can_update
+     * @return void
+     */
     public function test_course_can_update()
     {
         // $user = User::find(1)->first();
@@ -101,6 +117,10 @@ class CourseTest extends TestCase
             ]);
     }
 
+    /**
+     * Summary of test_course_can_deletes
+     * @return void
+     */
     public function test_course_can_deletes()
     {
         //$user = User::find(1)->first();
