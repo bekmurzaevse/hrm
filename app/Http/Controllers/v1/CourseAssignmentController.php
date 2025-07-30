@@ -5,6 +5,7 @@ namespace App\Http\Controllers\v1;
 use App\Actions\v1\CourseAssignment\CompleteAction;
 use App\Actions\v1\CourseAssignment\CreateAction;
 use App\Actions\v1\CourseAssignment\DeleteAction;
+use App\Actions\v1\CourseAssignment\DownloadAction;
 use App\Actions\v1\CourseAssignment\IndexAction;
 use App\Actions\v1\CourseAssignment\ShowAction;
 use App\Actions\v1\CourseAssignment\UpdateAction;
@@ -14,6 +15,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\v1\CourseAssignment\CreateRequest;
 use App\Http\Requests\v1\CourseAssignment\UpdateRequest;
 use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class CourseAssignmentController extends Controller
 {
@@ -60,6 +62,17 @@ class CourseAssignmentController extends Controller
     public function update(int $id, UpdateRequest $request, UpdateAction $action): JsonResponse
     {
         return $action($id, UpdateDto::from($request));
+    }
+
+    /**
+     * Summary of download
+     * @param int $id
+     * @param \App\Actions\v1\CourseAssignment\DownloadAction $action
+     * @return StreamedResponse
+     */
+    public function download(int $id, DownloadAction $action): StreamedResponse
+    {
+        return $action($id);
     }
 
     /**

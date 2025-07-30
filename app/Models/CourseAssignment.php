@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CourseAssignment extends Model
@@ -36,5 +37,10 @@ class CourseAssignment extends Model
     public function course()
     {
         return $this->belongsTo(Course::class);
+    }
+
+    public function certificate(): MorphOne
+    {
+        return $this->morphOne(File::class, 'fileable')->where('type', 'course_certificate');
     }
 }

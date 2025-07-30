@@ -13,12 +13,19 @@ class CourseAssignmentSeeder extends Seeder
      */
     public function run(): void
     {
-        CourseAssignment::create([
+        $assaignment1 = CourseAssignment::create([
             'course_id' => 1, 
             'user_id' => 1,   
             'assigned_at' => now(),
             'completed_at' => null,
             'certificate_url' => null,
+        ]);
+
+        $assaignment1->certificate()->create([
+            'name' => 'certificate_user1_course1.pdf',
+            'path' => 'certificates/user1-course1.pdf',
+            'type' => 'course_certificate',
+            'size' => 2048, // Example size in bytes
         ]);
 
         CourseAssignment::create([
